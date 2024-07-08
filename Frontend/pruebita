@@ -1,0 +1,63 @@
+// Supongamos que esto ocurre cuando el usuario envía un formulario de inicio de sesión
+const handleSubmit = async (event) => {
+  event.preventDefault(); // Previene que se recargue la página al hacer submit.
+
+  // Obtén los valores del formulario (correo y contraseña)
+  const email = event.target.email.value;
+  const password = event.target.password.value;
+
+  // Crea un objeto con los datos a enviar
+  const data = {
+    email: email,
+    password: password,
+  };
+
+  try {
+    // Realiza la solicitud POST utilizando Fetch
+    const response = await fetch('http://localhost:3000/usersJWT', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json', // Indica que estás enviando datos en formato JSON
+      },
+      body: JSON.stringify(data), // Convierte el objeto a una cadena JSON
+    });
+
+    if (response.ok) {
+      // La solicitud fue exitosa (código de estado 200)
+      const responseData = await response.json();
+      console.log('Respuesta del servidor:', responseData);
+      // Aquí puedes manejar la respuesta del servidor (por ejemplo, redirigir al usuario, guardar tokens, etc.)
+    } else {
+      // La solicitud falló (código de estado diferente de 200)
+      console.error('Error en la solicitud:', response.status, response.statusText);
+    }
+  } catch (error) {
+    console.error('Error al realizar la solicitud:', error.message);
+  }
+};
+
+
+import axios from 'axios'; // Asegúrate de tener Axios instalado en tu proyecto
+
+const handleSubmit = async (event) => {
+  event.preventDefault();
+
+  const email = event.target.email.value;
+  const password = event.target.password.value;
+
+  const data = {
+    email: email,
+    password: password,
+  };
+
+  try {
+    const response = await axios.post('http://localhost:3000/usersJWT', data);
+
+    // La solicitud fue exitosa
+    console.log('Respuesta del servidor:', response.data);
+    // Aquí puedes manejar la respuesta del servidor (por ejemplo, redirigir al usuario, guardar tokens, etc.)
+  } catch (error) {
+    // La solicitud falló
+    console.error('Error al realizar la solicitud:', error.message);
+  }
+};

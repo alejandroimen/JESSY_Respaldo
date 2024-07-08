@@ -1,0 +1,189 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-container {
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    height: 500px;
+    width: 700px;
+    max-width: 100%;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: -30px;
+}
+
+.modal-header h2 {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 32px;
+    cursor: pointer;
+}
+
+.close-btn i {
+    font-size: 32px;
+    color: #b30000;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.product-form-container {
+    display: flex;
+}
+
+.image-upload {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 200px;
+    background-color: #ffcccc;
+    border-radius: 8px;
+    margin-right: 20px;
+}
+
+.image-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.image-placeholder i {
+    font-size: 48px;
+    color: #b30000;
+}
+
+.product-form {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-fields-row {
+    display: flex;
+    gap: 10px;
+}
+
+.form-fields-row .input-container {
+    flex: 1;
+}
+
+.product-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.product-form .input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 5px;
+    border: 1px solid #b30000;
+    border-radius: 4px;
+    position: relative;
+}
+
+.product-form .nombre-input {
+    width: 94%;
+    border-radius: 10px;
+}
+
+.product-form .cantidad-input {
+    width: 85%;
+    border-radius: 10px;
+}
+
+.product-form .precio-input {
+    width: 85%;
+    border-radius: 11px;
+
+}
+
+.product-form .categoria-input {
+    width: 97%;
+    border-radius: 10px;
+}
+
+.product-form .proveedor-input {
+    width: 97%;
+    border-radius: 10px;
+}
+
+.product-form .descripcion-input {
+    width: 100%;
+    max-width: 195%;
+    height: 100px;
+    resize: none;
+    border-radius: 10px;
+}
+
+.product-form select.input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23b30000" class="bi bi-chevron-down" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/> </svg>') no-repeat right 10px center;
+    padding-right: 30px;
+}
+
+.product-form select.input:before {
+    content: "";
+    position: absolute;
+    right: 40px;
+    top: 10px;
+    bottom: 10px;
+    width: 1px;
+    background-color: #b30000;
+}
+
+.submit-btn {
+    background: #b30000;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    text-align: center;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-container .input {
+    margin-bottom: 0;
+}
+ 
