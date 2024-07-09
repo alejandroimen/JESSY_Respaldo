@@ -5,6 +5,7 @@ import RegisterForm from './components/organisms/RegisterForm';
 import ProductManagement from './components/pages/ProductManagement';
 import SidebarMenu from './components/molecules/SidebarMenu';
 import Navbar from './components/organisms/Navbar';
+import ManageSuppliers from './components/pages/ManageSuppliers';
 import './components/styles/styles.css';
 
 const App = () => {
@@ -30,12 +31,12 @@ const AppContent = () => {
             <Navbar />
             {!isAuthRoute && (
                 <>
-                    <SidebarMenu isOpen={isOpen} toggleMenu={toggleMenu} />
+                    {/*<SidebarMenu isOpen={isOpen} toggleMenu={toggleMenu} />
                     {!isOpen && (
                         <button className="menu-btn" onClick={toggleMenu}>
                             <i className="fas fa-bars"></i>
                         </button>
-                    )}
+                    )}*/}
                 </>
             )}
             <Routes>
@@ -43,6 +44,7 @@ const AppContent = () => {
                 <Route path="/register" element={<RegisterForm />} />
                 <Route path="/login" element={<LoginForm />} />
                 <Route path="/products" element={<ProductManagement toggleMenu={toggleMenu} />} />
+                <Route path="/suppliers" element={<ManageSuppliers />} />
             </Routes>
         </div>
     );

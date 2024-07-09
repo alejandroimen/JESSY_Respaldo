@@ -1,14 +1,14 @@
 import React from 'react';
-import '../styles/Modal.css';
+import '../styles/ModalSuppliers.css';
 
-const Modal = ({ isOpen, onClose, children }) => {
+const ModalSuppliers = ({ isOpen, onClose, children }) => {
     if (!isOpen) return null;
 
     return (
         <div className="modal-overlay">
             <div className="modal-container">
                 <div className="modal-header">
-                    <h2>Agregar producto</h2>
+                    <h2>Agregar proveedor</h2>
                     <button className="close-btn" onClick={onClose}>
                         <i className="fa-solid fa-xmark"></i>
                     </button>
@@ -21,4 +21,4 @@ const Modal = ({ isOpen, onClose, children }) => {
     );
 };
 
-export default Modal;
+export default ModalSuppliers;

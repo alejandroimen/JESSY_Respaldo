@@ -1,3 +1,4 @@
+/* ModalProductManagement.css */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -14,8 +15,8 @@
 .modal-container {
     background: white;
     padding: 10px;
-    border-radius: 8px;
-    height: 500px;
+    border-radius: 20px;
+    height: 850px;
     width: 700px;
     max-width: 100%;
 }
@@ -24,12 +25,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: -30px;
+    margin-bottom: -10px;
 }
 
 .modal-header h2 {
     flex-grow: 1;
     text-align: center;
+    margin-bottom: 40px;
 }
 
 .close-btn {
@@ -42,6 +44,7 @@
 .close-btn i {
     font-size: 32px;
     color: #b30000;
+    margin-top: -20px;
 }
 
 .modal-body {
@@ -63,14 +66,15 @@
     background-color: #ffcccc;
     border-radius: 8px;
     margin-right: 20px;
+    margin-top: 30px;
 }
 
 .image-placeholder {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 100%;
+    width: 50%;
+    height: 50%;
 }
 
 .image-placeholder i {
@@ -78,15 +82,10 @@
     color: #b30000;
 }
 
-.product-form {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-}
-
 .form-fields {
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
     gap: 10px;
 }
 
@@ -99,13 +98,17 @@
     flex: 1;
 }
 
-.product-form label {
+.form-fields label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
 }
 
-.product-form .input {
+.label-name {
+    margin-left: 2%;
+}
+
+.form-fields .input {
     width: 100%;
     padding: 10px;
     margin-bottom: 5px;
@@ -114,38 +117,25 @@
     position: relative;
 }
 
-.product-form .nombre-input {
-    width: 94%;
+.form-fields .nombre-input,
+.form-fields .cantidad-input,
+.form-fields .precio-input,
+.form-fields .categoria-input,
+.form-fields .proveedor-input {
     border-radius: 10px;
 }
 
-.product-form .cantidad-input {
-    width: 85%;
-    border-radius: 10px;
+.right-side {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.product-form .precio-input {
-    width: 85%;
-    border-radius: 11px;
-
-}
-
-.product-form .categoria-input {
-    width: 97%;
-    border-radius: 10px;
-}
-
-.product-form .proveedor-input {
-    width: 97%;
-    border-radius: 10px;
-}
-
-.product-form .descripcion-input {
-    width: 100%;
-    max-width: 195%;
+.right-side .descripcion-input {
+    width: 98%;
     height: 100px;
-    resize: none;
     border-radius: 10px;
+    border: 1px solid #b30000;
 }
 
 .product-form select.input {
@@ -166,16 +156,17 @@
     background-color: #b30000;
 }
 
-.submit-btn {
+.submit-btn-add {
     background: #b30000;
-    color: white;
+    color: #fff;
     padding: 10px 20px;
     border: none;
-    border-radius: 4px;
+    border-radius: 10px;
     cursor: pointer;
     font-size: 16px;
     width: 100%;
     text-align: center;
+    height: 40px;
 }
 
 .input-container {
@@ -186,4 +177,25 @@
 .input-container .input {
     margin-bottom: 0;
 }
- 
+
+/* Nuevo CSS para los divs left y right */
+.left-side {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+
+.right-side {
+    width: 100%;
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.descripcion-input {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 10px;
+}

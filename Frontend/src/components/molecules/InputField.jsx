@@ -19,3 +19,4 @@ InputField.propTypes = {
 };
 
 export default InputField;
+

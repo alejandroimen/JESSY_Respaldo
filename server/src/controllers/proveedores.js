@@ -56,11 +56,11 @@ exports.updateProveedor = [authenticateJWT, (req, res) => {
   const updatedProveedor = req.body;
   db.query('UPDATE Proveedor SET ? WHERE id_proveedor = ?', [updatedProveedor, proveedorId], (err, result) => {
     if (err) {
-      return res.status(500).send('Error al actualizar el proveedor');
-      
+      res.status(500).send('Error al actualizar el proveedor');
+      throw err;
     }
     if (result.affectedRows === 0) {
-      return res.status(404).send('Producto no encontrado');
+      return res.status(404).send('Proveedor no encontrado');
     }
     res.send('Proveedor actualizado correctamente');
   });
@@ -68,11 +68,18 @@ exports.updateProveedor = [authenticateJWT, (req, res) => {
 
 exports.deleteProveedor = [authenticateJWT, (req, res) => {
   const proveedorId = req.params.id;
-  db.query('DELETE FROM Proveedor WHERE id_proveedor = ?', proveedorId, (err, result) => {
+
+  db.query('DELETE FROM Proveedor WHERE id_proveedor = ?', [proveedorId], (err, result) => {
     if (err) {
-      res.status(500).send('Error al eliminar el proveedor');
-      throw err;
+      console.error('Error al eliminar el proveedor:', err); // Agregar un log para depuración
+      return res.status(500).send('Error al eliminar el proveedor'); // Asegurarse de retornar aquí
     }
+
+    if (result.affectedRows === 0) {
+      return res.status(404).send('Proveedor no encontrado'); // Asegurarse de retornar aquí
+    }
+
     res.send('Proveedor eliminado correctamente');
   });
 }];
+
