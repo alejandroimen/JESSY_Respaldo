@@ -7,7 +7,8 @@ import Button from '../atoms/Button';
 import Input from '../atoms/Input';
 
 const ManageSuppliers = ({ toggleSuppliersMenu }) => {
-    const [isModalSuppliersOpen, setIsModalSuppliersOpen] = useState(false);
+    const [isModalEditSuppliersOpen, setIsModalEditSuppliersOpen] = useState(false);
+    const [isModalAddSuppliersOpen, setIsModalAddSuppliersOpen] = useState(false);
     const [suppliers, setSuppliers] = useState([]);
     const [currentSupplier, setCurrentSupplier] = useState(null);
     const [nombre, setNombre] = useState('');
@@ -53,7 +54,6 @@ const ManageSuppliers = ({ toggleSuppliersMenu }) => {
                 alert('Proveedor agregado correctamente');
             }
             fetchSuppliers();
-            handleModalSuppliersToggle();
         } catch (error) {
             console.error('Error adding or editing supplier', error);
         }
@@ -74,13 +74,18 @@ const ManageSuppliers = ({ toggleSuppliersMenu }) => {
         }
     };
 
-    const handleModalSuppliersToggle = () => {
-        setIsModalSuppliersOpen(!isModalSuppliersOpen);
+    const handleModalAddSuppliersToggle = () => {
+        setIsModalAddSuppliersOpen(!isModalAddSuppliersOpen);
         setCurrentSupplier(null);
         setNombre('');
         setEmail('');
         setTelefono('');
     };
+    const handleModalEditSuppliersToggle = () => {
+        setIsModalEditSuppliersOpen(!isModalEditSuppliersOpen);
+        setCurrentSupplier(null);
+    };
+    
 
     return (
         <div className="product-management">
@@ -105,7 +110,7 @@ const ManageSuppliers = ({ toggleSuppliersMenu }) => {
                         <h1>Administrar proveedores</h1>
                     </div>
                     <div className="right-actions">
-                        <i className="fa-solid fa-plus new-product-btn" onClick={handleModalSuppliersToggle}></i>
+                        <i className="fa-solid fa-plus new-product-btn" onClick={handleModalAddSuppliersToggle}></i>
                     </div>
                 </div>
                 <div className="product-list-container">
@@ -117,7 +122,7 @@ const ManageSuppliers = ({ toggleSuppliersMenu }) => {
                                     setNombre(supplier.name);
                                     setEmail(supplier.email);
                                     setTelefono(supplier.telefono);
-                                    setIsModalSuppliersOpen(true);
+                                    setIsModalEditSuppliersOpen(true);
                                 }}>
                                     <div className="red-square"></div>
                                 </button>
@@ -132,7 +137,7 @@ const ManageSuppliers = ({ toggleSuppliersMenu }) => {
                                         setNombre(supplier.name);
                                         setEmail(supplier.email);
                                         setTelefono(supplier.telefono);
-                                        setIsModalSuppliersOpen(true);
+                                        setIsModalEditSuppliersOpen(true);
                                     }}>
                                         <i className="fa-solid fa-pencil"></i>
                                     </button>
@@ -145,7 +150,7 @@ const ManageSuppliers = ({ toggleSuppliersMenu }) => {
                     </div>
                 </div>
             </div>
-            <ModalSuppliers isOpen={isModalSuppliersOpen} onClose={handleModalSuppliersToggle}>
+            <ModalSuppliers isOpen={isModalEditSuppliersOpen} onClose={handleModalEditSuppliersToggle} titulo="Editar Proveedor">
                 <div className="modal-body">
                     <div className="product-form-container">
                         <div className="left-side">
@@ -164,7 +169,30 @@ const ManageSuppliers = ({ toggleSuppliersMenu }) => {
                         </div>
                     </div>
                     <div className="right-side">
-                        <Button className="submit-btn-add" onClick={handleAddOrEditSupplier}>Agregar</Button>
+                        <Button className="submit-btn-add" onClick={handleAddOrEditSupplier} label={"Guardar"}></Button>
+                    </div>
+                </div>
+            </ModalSuppliers>
+            <ModalSuppliers isOpen={isModalAddSuppliersOpen} onClose={handleModalAddSuppliersToggle} titulo="Agregar Proveedor">
+                <div className="modal-body">
+                    <div className="product-form-container">
+                        <div className="left-side">
+                            <div className="form-fields">
+                                <label className="label-name">Nombre</label>
+                                <Input type="text" className="input name-input" value={nombre} onChange={(e) => setNombre(e.target.value)} />
+                            </div>
+                            <div className="form-fields">
+                                <label className="label-email">Email</label>
+                                <Input type="text" className="input email-input" value={email} onChange={(e) => setEmail(e.target.value)} />
+                            </div>
+                            <div className="form-fields">
+                                <label className="label-phone-number">Teléfono</label>
+                                <Input type="text" className="input phone-number-input" value={telefono} onChange={(e) => setTelefono(e.target.value)} />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="right-side">
+                        <Button className="submit-btn-add" onClick={handleAddOrEditSupplier} label={"Agregar"}></Button>
                     </div>
                 </div>
             </ModalSuppliers>
