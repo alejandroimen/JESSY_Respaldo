@@ -50,11 +50,9 @@ const ModalSuppliers = ({ isOpen, onClose, titulo, nombre, setNombre, email, set
                                 </div>
                             </div>
                         </div>
-                        <div className="modal-suppliers-footer">
-                            <button type="submit" className="modal-suppliers-submit-btn-add">
-                                {titulo.includes('Agregar') ? 'Agregar' : 'Guardar'}
-                            </button>
-                        </div>
+                        <button type="submit" className="modal-suppliers-submit-btn-add">
+                            {titulo.includes('Agregar') ? 'Agregar' : 'Guardar'}
+                        </button>
                     </form>
                 </div>
             </div>

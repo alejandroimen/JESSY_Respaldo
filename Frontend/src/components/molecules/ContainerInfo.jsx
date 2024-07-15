@@ -1,13 +1,14 @@
 import React from "react";
 import imagen from "../../assets/sendlier.png"
 import "../styles/molecules/ContainerInfo.css"
+import { FaRegBookmark } from "react-icons/fa6";
 
 function ContainerInfo(){
     return(
         <div className="container-info-and-buttons">
             <div className="container-buttons">
                 <button className="btn-icon">
-                    D
+                    <FaRegBookmark />
                 </button>
                 <button className="btn-text">
                         Ir a comprar
