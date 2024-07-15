@@ -19,7 +19,7 @@ const SidebarMenu = ({ isOpen, toggleMenu }) => {
                         <li><a href="#">Gestionar categorías</a></li>
                         <li><a href="/suppliers">Administrar proveedores</a></li>
                         <li><a href="#">Historial de ventas</a></li>
-                        <li><a href="#">Ver como cliente</a></li>
+                        <li><a href="/client">Ver como cliente</a></li>
                     </ul>
                 </nav>
                 <div className="logout-container">

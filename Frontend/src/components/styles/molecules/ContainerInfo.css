@@ -1,0 +1,74 @@
+.container-info-and-buttons {
+    position: relative;
+    width: 80%;
+    margin: 60px 0px;
+    padding: 0px;
+}
+
+.container-buttons {
+    width: 20%;
+    position: absolute;
+    right: 0%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.btn-icon {
+    background: none;
+    border: none;
+    color: #b30000;
+    font-size: 30px;
+}
+.btn-text {
+    background-color: #b30000;
+    border: none;
+    border-radius: 12px;
+    width: 8vw;
+    color: white;
+    letter-spacing: 2px;
+    font-size: 18px;
+    padding: 10px;
+}
+
+.container-elements {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.container-elements img {
+    border-radius: 5px;
+    height: 30vw;
+}
+.text-container {
+    padding: 0px 0px 0px 5%;
+    width: 55%;
+}
+
+.titulo {
+    font-size: 35px;
+    padding: 0;
+}
+
+.precio-anterior {
+    text-decoration: line-through;
+    font-size: 20px;
+    font-weight: 400;
+    margin: 20px 0px 0px 0px;
+}
+
+.precio-actual {
+    margin: 0px 0px 0px 0px;
+    font-size: 35px;
+    font-weight: 400;
+}
+
+.categoria{
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.descripcion  {
+    font-weight: 300;
+    word-spacing: 3px;
+    letter-spacing: 1px;
+}

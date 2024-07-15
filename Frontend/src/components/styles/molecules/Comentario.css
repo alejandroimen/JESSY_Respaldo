@@ -1,0 +1,28 @@
+.comentario-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    box-sizing: border-box;
+ }
+
+.comentario-container img {
+    border-radius: 50%;
+    height: 20vh;
+}
+
+ .container-comment-content {
+    padding: 0 0 0 20px;
+    text-align: justify;
+ }
+
+ .container-comment-content h4 {
+    font-weight: 400;
+    margin: 0 0 10px 0;
+ }
+
+ .container-comment-content p {
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 1px;
+ }
