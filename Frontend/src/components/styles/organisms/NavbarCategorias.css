@@ -1,0 +1,35 @@
+.lista-categorias {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    list-style: none;
+}
+
+.opcion-categoria {
+    cursor: default;
+    margin-right: 20px;
+    padding: 10px;
+    font-weight: 500;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    transition: .2s;
+
+    transition: 0.3s;
+}
+.opcion-categoria:hover {
+    color: #b30000;
+    font-weight: 500;
+    transition: .2s;
+}
+ 
+.categoria-seleccionada {
+    cursor: default;
+    box-shadow: 0px -6px 5px rgba(179, 0, 0, 0.25);
+    padding: 10px;
+    margin-right: 20px;
+    font-weight: 500;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+
+    transition: 0.3s;
+}

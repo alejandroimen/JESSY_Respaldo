@@ -6,6 +6,8 @@ import ProductManagement from './components/pages/ProductManagement';
 import SidebarMenu from './components/molecules/SidebarMenu';
 import Navbar from './components/organisms/Navbar';
 import ManageSuppliers from './components/pages/ManageSuppliers';
+import ClientPage from './components/pages/ClientPage';
+import InformationProduct from './components/pages/InformationProduct';
 import './components/styles/organisms/styles.css'
 
 const App = () => {
@@ -45,6 +47,8 @@ const AppContent = () => {
                 <Route path="/login" element={<LoginForm />} />
                 <Route path="/products" element={<ProductManagement toggleMenu={toggleMenu} />} />
                 <Route path="/suppliers" element={<ManageSuppliers />} />
+                <Route path="/client" element={<ClientPage />} />
+                <Route path="/info" element={<InformationProduct />} />
             </Routes>
         </div>
     );
