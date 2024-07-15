@@ -6,6 +6,7 @@ import Button from '../atoms/Button';
 import FormContainer from '../templates/FormContainer';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import '../styles/organisms/styles.css';
+//const { refreshAccessToken } = require('/server/src/tokens.js');
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
@@ -25,6 +26,7 @@ const LoginForm = () => {
             alert("Inicio de sesión exitoso");
             // Guarda el token en localStorage o en el contexto de la aplicación
             localStorage.setItem('token', response.data.token);
+            
         } catch (error) {
             console.error(error);
             alert("Error al iniciar sesión");

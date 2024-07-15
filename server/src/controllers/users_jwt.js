@@ -1,6 +1,7 @@
 const mysql = require('mysql2');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const { refreshAccessToken } = require('../tokens');
 require('dotenv').config();
 
 // Configuración de la base de datos
@@ -37,6 +38,10 @@ exports.login = async (req, res) => {
     // Generar JWT
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
     res.json({ token });
+    // Refresca el token cada 5 horas y 50 minutos (350 minutos)
+    setInterval(refreshAccessToken, 350 * 60 * 1000);
+    // Llama a la función al iniciar la aplicación
+    refreshAccessToken();
   });
 };
 
