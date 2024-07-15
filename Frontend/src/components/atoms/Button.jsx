@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/styles.css';
+import '../styles/organisms/styles.css';
 
 // eslint-disable-next-line react/prop-types
 const Button = ({ label, onClick, className }) => (

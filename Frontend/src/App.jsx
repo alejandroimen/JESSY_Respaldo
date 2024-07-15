@@ -6,7 +6,7 @@ import ProductManagement from './components/pages/ProductManagement';
 import SidebarMenu from './components/molecules/SidebarMenu';
 import Navbar from './components/organisms/Navbar';
 import ManageSuppliers from './components/pages/ManageSuppliers';
-import './components/styles/styles.css';
+import './components/styles/organisms/styles.css'
 
 const App = () => {
     return (
@@ -31,12 +31,12 @@ const AppContent = () => {
             <Navbar />
             {!isAuthRoute && (
                 <>
-                    {/*<SidebarMenu isOpen={isOpen} toggleMenu={toggleMenu} />
+                    <SidebarMenu isOpen={isOpen} toggleMenu={toggleMenu} />
                     {!isOpen && (
                         <button className="menu-btn" onClick={toggleMenu}>
                             <i className="fas fa-bars"></i>
                         </button>
-                    )}*/}
+                    )}
                 </>
             )}
             <Routes>

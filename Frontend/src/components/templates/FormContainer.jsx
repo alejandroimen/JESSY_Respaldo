@@ -1,6 +1,6 @@
 import React from 'react';
 import Icon from '../atoms/Icon';
-import '../styles/styles.css';
+import '../styles/organisms/styles.css';
 
 const FormContainer = ({ icon, children }) => (
     <div className="form-container">

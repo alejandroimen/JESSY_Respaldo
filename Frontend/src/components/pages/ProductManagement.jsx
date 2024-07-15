@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import '../styles/ProductManagement.css';
 import Logo from '../atoms/Logo';
-import ModalProductManagement from '../atoms/ModalProductManagement';
+import ModalProductManagement from '../molecules/ModalProductManagement';
+import ModalEditProductManagement from '../molecules/ModalEditProductManagement';
+import ModalDeleteProductManagement from '../molecules/ModalDeleteProductManagement';
 import Button from '../atoms/Button';
 import Input from '../atoms/Input';
 import ImageUpload from '../atoms/ImageUpload';
-
+import '../styles/pages/ProductManagement.css';
 
 const ProductManagement = ({ toggleMenu }) => {
     const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -13,6 +14,8 @@ const ProductManagement = ({ toggleMenu }) => {
     const [minPrice, setMinPrice] = useState(0);
     const [maxPrice, setMaxPrice] = useState(100);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
     const toggleFilterMenu = () => {
         setIsFilterOpen(!isFilterOpen);
@@ -36,6 +39,19 @@ const ProductManagement = ({ toggleMenu }) => {
         setIsModalOpen(!isModalOpen);
     };
 
+    const handleEditModalToggle = () => {
+        setIsEditModalOpen(!isEditModalOpen);
+    };
+
+    const handleDeleteModalToggle = () => {
+        setIsDeleteModalOpen(!isDeleteModalOpen);
+    };
+
+    const handleDelete = () => {
+        // Lógica para eliminar el producto
+        handleDeleteModalToggle();
+    };
+
     return (
         <div className="product-management">
             <header className="navbar">
@@ -43,8 +59,8 @@ const ProductManagement = ({ toggleMenu }) => {
                     <button className="menu-btn" onClick={toggleMenu}>
                         <i className="fas fa-bars"></i>
                     </button>
-                    <div className="header-line">
-                        <Logo />
+                    <div className="header-logo">
+                        <Logo className="custom-logo" />
                     </div>
                 </div>
                 <div className="navbar-center">
@@ -142,10 +158,10 @@ const ProductManagement = ({ toggleMenu }) => {
                                 <p>Proveedor</p>
                             </div>
                             <div className="product-actions">
-                                <button className="add-pencil-btn">
+                                <button className="add-pencil-btn" onClick={handleEditModalToggle}>
                                     <i className="fa-solid fa-pencil"></i>
                                 </button>
-                                <button className="delete-btn">
+                                <button className="delete-btn" onClick={handleDeleteModalToggle}>
                                     <i className="fas fa-trash"></i>
                                 </button>
                             </div>
@@ -154,50 +170,11 @@ const ProductManagement = ({ toggleMenu }) => {
                     </div>
                 </div>
             </div>
-            <ModalProductManagement isOpen={isModalOpen} onClose={handleModalToggle}>
-                <div className="modal-body">
-                    <div className="product-form-container">
-                        <ImageUpload />
-                        <div className="left-side">
-                            <div className="form-fields">
-                                <label className="label-name">Nombre</label>
-                                <Input type="text" className="input nombre-input" />
-                                <div className="form-fields-row">
-                                    <div className="input-container">
-                                        <label>Cantidad</label>
-                                        <Input type="number" className="input cantidad-input" />
-                                    </div>
-                                    <div className="input-container">
-                                        <label>Precio</label>
-                                        <Input type="number" className="input precio-input" />
-                                    </div>
-                                </div>
-                                <div className="input-container">
-                                    <select className="input categoria-input">
-                                        <option value="" disabled selected hidden>Categoría</option>
-                                        <option value="cat1">Categoría 1</option>
-                                        <option value="cat2">Categoría 2</option>
-                                    </select>
-                                </div>
-                                <div className="input-container">
-                                    <select className="input proveedor-input">
-                                        <option value="" disabled selected hidden>Proveedor</option>
-                                        <option value="prov1">Proveedor 1</option>
-                                        <option value="prov2">Proveedor 2</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="right-side">
-                        <textarea className="input descripcion-input" placeholder="Escribe una pequeña descripción..."></textarea>
-                        <Button className="submit-btn-add">Agregar</Button>
-                    </div>
-                </div>
-            </ModalProductManagement>
+            <ModalProductManagement isOpen={isModalOpen} onClose={handleModalToggle} />
+            <ModalEditProductManagement isOpen={isEditModalOpen} onClose={handleEditModalToggle} />
+            <ModalDeleteProductManagement isOpen={isDeleteModalOpen} onClose={handleDeleteModalToggle} onDelete={handleDelete} />
         </div>
     );
 };
 
 export default ProductManagement;
-

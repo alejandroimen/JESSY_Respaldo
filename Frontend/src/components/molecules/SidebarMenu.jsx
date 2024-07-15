@@ -1,19 +1,15 @@
 import React from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import '../styles/SidebarMenu.css';
 import Logo from '../atoms/Logo';
+import '../styles/organisms/SidebarMenu.css';
 
 const SidebarMenu = ({ isOpen, toggleMenu }) => {
     return (
         <div className={`sidebar-container ${isOpen ? 'open' : ''}`}>
             <div className={`sidebar ${isOpen ? 'open' : ''}`}>
                 <div className="profile-section">
-                    <div className="logo-container-sidebar">
-                        <div className="Logo">
-                            <Logo />
-                        </div>
-                    </div>
-                    <button className="close-btn-bar" onClick={toggleMenu}>
+                    <Logo className="logo-sidebar" />
+                    <button className="close-btn" onClick={toggleMenu}>
                         <i className="fas fa-times"></i>
                     </button>
                 </div>

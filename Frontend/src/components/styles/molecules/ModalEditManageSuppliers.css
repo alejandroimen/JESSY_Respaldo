@@ -1,0 +1,205 @@
+.modal-edit-manage-suppliers-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-edit-manage-suppliers-container {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    width: 600px;
+    max-width: 90%;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-edit-manage-suppliers-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.modal-edit-manage-suppliers-header h2 {
+    margin: 0;
+    font-size: 30px;
+    text-align: center;
+    letter-spacing: 1px;
+    margin-left: 250px;
+}
+
+.modal-edit-manage-suppliers-close-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.modal-edit-manage-suppliers-close-btn i {
+    color: #b30000;
+    font-size: 35px;
+}
+
+.modal-edit-manage-suppliers-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.modal-edit-manage-suppliers-form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.modal-edit-manage-suppliers-upper {
+    display: flex;
+    gap: 20px;
+}
+
+.modal-edit-manage-suppliers-image-upload {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 180px;
+    height: 180px;
+    background-color: #ffcccc;
+    border-radius: 8px;
+    margin-top: 50px;
+}
+
+.modal-edit-manage-suppliers-image-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    height: 80%;
+}
+
+.modal-edit-manage-suppliers-image-placeholder i {
+    font-size: 70px;
+    color: #b30000;
+}
+
+.modal-edit-manage-suppliers-form-fields {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 10px;
+}
+
+.modal-edit-manage-suppliers-form-fields-row {
+    display: flex;
+    gap: 20px;
+}
+
+.modal-edit-manage-suppliers-input-container {
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-edit-manage-suppliers-label-name {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.modal-edit-manage-suppliers-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #b30000;
+    border-radius: 10px;
+}
+
+.modal-edit-manage-suppliers-nombre-input {
+    width: 95%;
+    display: block;
+    margin: 0 auto;
+}
+
+.modal-edit-manage-suppliers-cantidad-input,
+.modal-edit-manage-suppliers-precio-input {
+    width: 89%;
+    display: block;
+    margin: 0 auto;
+}
+
+.modal-edit-manage-suppliers-select-container {
+    display: flex;
+    align-items: center;
+}
+
+.modal-edit-manage-suppliers-select-icon {
+    background: none;
+    border: none;
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #b30000;
+}
+
+.modal-edit-manage-suppliers-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.modal-edit-manage-suppliers-dropdown li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.modal-edit-manage-suppliers-dropdown li:hover {
+    background: #f0f0f0;
+}
+
+.modal-edit-manage-suppliers-descripcion-input {
+    width: 95%;
+    height: 100px;
+    padding: 10px 20px;
+    border: 1px solid #b30000;
+    border-radius: 15px;
+    cursor: pointer;
+    resize: none;
+    display: block;
+    margin: 0 auto;
+    margin-left: -8px;
+}
+
+.modal-edit-manage-suppliers-submit-btn-save {
+    background: #b30000;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    margin-top: 10px;
+    font-family: 'Thin', sans-serif;
+    font-weight: 100;
+    letter-spacing: 1px;
+}

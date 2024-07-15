@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../styles/styles.css';
+import '../styles/organisms/styles.css';
 
 const Icon = ({ name }) => {
     return <i className={`fas fa-${name}`}></i>;

@@ -29,42 +29,23 @@
     width: 100%;
 }
 
-.logo-container-sidebar {
-    display: flex;
-    justify-content: flex-start;
+.logo-sidebar {
     width: 100px;
-    height: 30px;
-    z-index: 2000;
+    height: 50px;
 }
 
-.logo-container-sidebar .header-line {
-    width: 100px;
-    height: 40px;
-}
-
-.header-logo {
-    height: 20px;
-    width: 40px;
-    z-index: 4000;
-    margin-left: 20px;
-}
-
-.close-btn-bar {
+.close-btn {
     background: none;
     border: none;
     color: white;
     cursor: pointer;
     margin-left: auto;
-    z-index: 2000;
-    margin-top: 15px;
-}
-
-.close-btn-bar i {
     font-size: 30px;
 }
 
-.close-btn {
-    font-size: 10px;
+.close-btn i {
+    font-size: 30px;
+    color: white;
 }
 
 .menu {
@@ -120,8 +101,4 @@
 
 .menu-btn i {
     font-size: inherit;
-}
-
-.content {
-    margin-top: 100px;
 }

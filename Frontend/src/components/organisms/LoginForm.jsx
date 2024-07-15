@@ -5,7 +5,7 @@ import InputField from '../molecules/InputField';
 import Button from '../atoms/Button';
 import FormContainer from '../templates/FormContainer';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import '../styles/styles.css';
+import '../styles/organisms/styles.css';
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');

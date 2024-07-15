@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from '../atoms/Icon';
-import '../styles/styles.css';
+import '../styles/organisms/styles.css';
 
 const InputField = ({ id, type, placeholder, iconName, onChange }) => {
     return (
@@ -19,4 +19,3 @@ InputField.propTypes = {
 };
 
 export default InputField;
-

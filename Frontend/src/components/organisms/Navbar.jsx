@@ -1,6 +1,6 @@
 import React from 'react';
 import Logo from '../atoms/Logo';
-import '../styles/Navbar.css';
+import '../styles/organisms/Navbar.css';
 
 const Navbar = () => {
     return (

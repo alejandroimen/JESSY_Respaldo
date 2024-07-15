@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../styles/ManageSuppliers.css';
+import '../styles/pages/ManageSuppliers.css';
 import Logo from '../atoms/Logo';
-import ModalSuppliers from '../atoms/ModalSuppliers';
 import Button from '../atoms/Button';
-import Input from '../atoms/Input';
+import ModalSuppliers from '../molecules/ModalSuppliers';
+import DeleteModal from '../molecules/DeleteModal';
 
 const ManageSuppliers = ({ toggleSuppliersMenu }) => {
     const [isModalEditSuppliersOpen, setIsModalEditSuppliersOpen] = useState(false);
     const [isModalAddSuppliersOpen, setIsModalAddSuppliersOpen] = useState(false);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [suppliers, setSuppliers] = useState([]);
     const [currentSupplier, setCurrentSupplier] = useState(null);
     const [nombre, setNombre] = useState('');
@@ -33,7 +34,8 @@ const ManageSuppliers = ({ toggleSuppliersMenu }) => {
         }
     };
 
-    const handleAddOrEditSupplier = async () => {
+    const handleAddOrEditSupplier = async (event) => {
+        event.preventDefault();
         const supplierData = { nombre, email, telefono };
 
         try {
@@ -54,21 +56,24 @@ const ManageSuppliers = ({ toggleSuppliersMenu }) => {
                 alert('Proveedor agregado correctamente');
             }
             fetchSuppliers();
+            handleModalClose();
         } catch (error) {
             console.error('Error adding or editing supplier', error);
         }
     };
 
-    const handleDeleteSupplier = async (id_proveedor) => {
+    const handleDeleteSupplier = async () => {
         try {
             const token = localStorage.getItem('token');
-            await axios.delete(`http://localhost:3000/proveedores/${id_proveedor}`, {
+            await axios.delete(`http://localhost:3000/proveedores/${currentSupplier.id_proveedor}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             });
             alert('Proveedor eliminado correctamente');
             fetchSuppliers();
+            setIsDeleteModalOpen(false);
+            setCurrentSupplier(null);
         } catch (error) {
             console.error('Error deleting supplier', error);
         }
@@ -81,11 +86,23 @@ const ManageSuppliers = ({ toggleSuppliersMenu }) => {
         setEmail('');
         setTelefono('');
     };
+
     const handleModalEditSuppliersToggle = () => {
         setIsModalEditSuppliersOpen(!isModalEditSuppliersOpen);
         setCurrentSupplier(null);
+        setNombre('');
+        setEmail('');
+        setTelefono('');
     };
-    
+
+    const handleModalClose = () => {
+        setIsModalEditSuppliersOpen(false);
+        setIsModalAddSuppliersOpen(false);
+        setCurrentSupplier(null);
+        setNombre('');
+        setEmail('');
+        setTelefono('');
+    };
 
     return (
         <div className="product-management">
@@ -119,7 +136,7 @@ const ManageSuppliers = ({ toggleSuppliersMenu }) => {
                             <div className="product-item" key={supplier.id_proveedor}>
                                 <button className="edit-btn" onClick={() => {
                                     setCurrentSupplier(supplier);
-                                    setNombre(supplier.name);
+                                    setNombre(supplier.nombre);
                                     setEmail(supplier.email);
                                     setTelefono(supplier.telefono);
                                     setIsModalEditSuppliersOpen(true);
@@ -134,14 +151,18 @@ const ManageSuppliers = ({ toggleSuppliersMenu }) => {
                                 <div className="product-actions">
                                     <button className="add-pencil-btn" onClick={() => {
                                         setCurrentSupplier(supplier);
-                                        setNombre(supplier.name);
+                                        console.log(supplier);
+                                        setNombre(supplier.nombre);
                                         setEmail(supplier.email);
                                         setTelefono(supplier.telefono);
                                         setIsModalEditSuppliersOpen(true);
                                     }}>
                                         <i className="fa-solid fa-pencil"></i>
                                     </button>
-                                    <button className="delete-btn" onClick={() => handleDeleteSupplier(supplier.id_proveedor)}>
+                                    <button className="delete-btn" onClick={() => {
+                                        setCurrentSupplier(supplier);
+                                        setIsDeleteModalOpen(true);
+                                    }}>
                                         <i className="fas fa-trash"></i>
                                     </button>
                                 </div>
@@ -150,52 +171,35 @@ const ManageSuppliers = ({ toggleSuppliersMenu }) => {
                     </div>
                 </div>
             </div>
-            <ModalSuppliers isOpen={isModalEditSuppliersOpen} onClose={handleModalEditSuppliersToggle} titulo="Editar Proveedor">
-                <div className="modal-body">
-                    <div className="product-form-container">
-                        <div className="left-side">
-                            <div className="form-fields">
-                                <label className="label-name">Nombre</label>
-                                <Input type="text" className="input name-input" value={nombre} onChange={(e) => setNombre(e.target.value)} />
-                            </div>
-                            <div className="form-fields">
-                                <label className="label-email">Email</label>
-                                <Input type="text" className="input email-input" value={email} onChange={(e) => setEmail(e.target.value)} />
-                            </div>
-                            <div className="form-fields">
-                                <label className="label-phone-number">Teléfono</label>
-                                <Input type="text" className="input phone-number-input" value={telefono} onChange={(e) => setTelefono(e.target.value)} />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="right-side">
-                        <Button className="submit-btn-add" onClick={handleAddOrEditSupplier} label={"Guardar"}></Button>
-                    </div>
-                </div>
-            </ModalSuppliers>
-            <ModalSuppliers isOpen={isModalAddSuppliersOpen} onClose={handleModalAddSuppliersToggle} titulo="Agregar Proveedor">
-                <div className="modal-body">
-                    <div className="product-form-container">
-                        <div className="left-side">
-                            <div className="form-fields">
-                                <label className="label-name">Nombre</label>
-                                <Input type="text" className="input name-input" value={nombre} onChange={(e) => setNombre(e.target.value)} />
-                            </div>
-                            <div className="form-fields">
-                                <label className="label-email">Email</label>
-                                <Input type="text" className="input email-input" value={email} onChange={(e) => setEmail(e.target.value)} />
-                            </div>
-                            <div className="form-fields">
-                                <label className="label-phone-number">Teléfono</label>
-                                <Input type="text" className="input phone-number-input" value={telefono} onChange={(e) => setTelefono(e.target.value)} />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="right-side">
-                        <Button className="submit-btn-add" onClick={handleAddOrEditSupplier} label={"Agregar"}></Button>
-                    </div>
-                </div>
-            </ModalSuppliers>
+            <ModalSuppliers
+                isOpen={isModalEditSuppliersOpen}
+                onClose={handleModalEditSuppliersToggle}
+                titulo="Editar Proveedor"
+                nombre={nombre}
+                setNombre={setNombre}
+                email={email}
+                setEmail={setEmail}
+                telefono={telefono}
+                setTelefono={setTelefono}
+                handleSubmit={handleAddOrEditSupplier}
+            />
+            <ModalSuppliers
+                isOpen={isModalAddSuppliersOpen}
+                onClose={handleModalAddSuppliersToggle}
+                titulo="Agregar Proveedor"
+                nombre={nombre}
+                setNombre={setNombre}
+                email={email}
+                setEmail={setEmail}
+                telefono={telefono}
+                setTelefono={setTelefono}
+                handleSubmit={handleAddOrEditSupplier}
+            />
+            <DeleteModal
+                isOpen={isDeleteModalOpen}
+                onClose={() => setIsDeleteModalOpen(false)}
+                onDelete={handleDeleteSupplier}
+            />
         </div>
     );
 };
