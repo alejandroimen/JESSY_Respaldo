@@ -9,7 +9,9 @@ const categoriasRoutes= require('./routes/Categorias');
 const comprasRoutes = require('./routes/Compras');
 const listadeDeseosRoutes = require('./routes/ListaDeDeseos');
 const productosRoutes = require('./routes/productos');
+const productosMLRoutes = require('./routes/productoML');
 const comentariosRoutes = require('./routes/Comentarios')
+const { refreshAccessToken } = require('./tokens');
 require('dotenv').config();
 
 const app = express();
@@ -34,7 +36,12 @@ app.use('/compras', comprasRoutes);
 app.use('/listadeseos', listadeDeseosRoutes);
 app.use('/productos', productosRoutes);
 app.use('/comentarios', comentariosRoutes);
+app.use('/products',productosMLRoutes)
 
 app.listen(port, () => {
   console.log(`Servidor Express en ejecución en http://localhost:${port}`);
+  /* // Refresca el token cada 5 horas y 50 minutos (350 minutos)
+  setInterval(refreshAccessToken, 350 * 60 * 1000);
+  // Llama a la función al iniciar la aplicación
+  refreshAccessToken(); */ //Esto ya lo tengo en otro lado (al momento de logiarse)
 });
