@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import InputField from '../molecules/InputField';
+import Logo from '../atoms/Logo';
 import Button from '../atoms/Button';
 import FormContainer from '../templates/FormContainer';
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -42,7 +43,12 @@ const LoginForm = () => {
 
     return (
         <div className="app-container">
-            <FormContainer icon="user">
+            <header className="header-login">
+                <div className="header-logo-login">
+                    <Logo className="custom-logo" />
+                </div>
+            </header>   
+            <FormContainer icon="user" titulo="Bievenido">
                 <form onSubmit={handleLogin} className="form">
                     <label className="input-label" htmlFor="email">Correo electrónico</label>
                     <InputField
@@ -54,7 +60,7 @@ const LoginForm = () => {
                     />
                     <label className="input-label" htmlFor="password">Contraseña</label>
                     <div className="input-field">
-                        <input
+                        <input 
                             id="password"
                             type={showPassword ? "text" : "password"}
                             value={password}
