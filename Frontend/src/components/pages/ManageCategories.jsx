@@ -1,6 +1,7 @@
 //Esta es la vista completa de categoria
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Logo from '../atoms/Logo';
+import axios from 'axios';
 import ModalCategories from '../molecules/ModalCategories';
 import ModalEditManageCategories from '../molecules/ModalEditManageCategories';
 import Button from '../atoms/Button';
@@ -8,16 +9,37 @@ import Input from '../atoms/Input';
 import ModalDeleteManageCategories from '../molecules/ModalDeleteManageCategories';
 import '../styles/pages/ManageCategories.css'
 
-const ManageCategories = ({ toggleCategoriesMenu }) => {
+function ManageCategories({ toggleCategoriesMenu }) {
+    const [categories, setCategories] = useState([]);
     const [isModalCategoriesOpen, setIsModalCategoriesOpen] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const [newCategory, setNewCategory] = useState({ id_Categorias: '', nombreCategoria: '' });
+    const [editCategory, setEditCategory] = useState({ id_Categorias: '', nombreCategoria: '' });
+
+    const fetchCategories = async () => {
+        try {
+            const response = await axios.get('http://localhost:3000/categorias', {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            });
+            setCategories(response.data);
+        } catch (error) {
+            console.error('Error al obtener las categorías:', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchCategories();
+    }, []);
 
     const handleModalCategoriesToggle = () => {
         setIsModalCategoriesOpen(!isModalCategoriesOpen);
     };
 
-    const handleEditModalToggle = () => {
+    const handleEditModalToggle = (category) => {
+        setEditCategory(category);
         setIsEditModalOpen(!isEditModalOpen);
     };
 
@@ -25,11 +47,33 @@ const ManageCategories = ({ toggleCategoriesMenu }) => {
         setIsDeleteModalOpen(!isDeleteModalOpen);
     };
 
-    const handleDelete = () => {
-        // Lógica para eliminar la categoría
-        console.log('Categoría eliminada');
-        setIsDeleteModalOpen(false);
+    const handleAddCategory = async () => {
+        try {
+            await axios.post('http://localhost:3000/categorias/', newCategory, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            });
+            fetchCategories();
+            setIsModalCategoriesOpen(false);
+        } catch (error) {
+            console.error('Error al agregar la categoría:', error);
+        }
     };
+
+    const handleEditCategory = async () => {
+        try {
+            await axios.put(`http://localhost:3000/categorias/${editCategory.id_Categorias}`, editCategory, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            });
+            fetchCategories();
+            setIsEditModalOpen(false);
+        } catch (error) {
+            console.error('Error al editar la categoría:', error);
+        }
+    }; 
 
     return (
         <div className="category-management">
@@ -59,45 +103,48 @@ const ManageCategories = ({ toggleCategoriesMenu }) => {
                 </div>
                 <div className="category-list-container">
                     <div className="category-list">
-                        <div className="category-item">
-                            <button className="edit-btn">
-                                <div className="red-square"></div>
-                            </button>
-                            <div className="category-details-name">
-                                <p>Nombre</p>
-                            </div>
-                            <div className="category-details-products">
-                                <p>Ver productos</p>
-                            </div>
-                            <div className="category-actions">
-                                <button className="add-pencil-btn" onClick={handleEditModalToggle}>
-                                    <i className="fa-solid fa-pencil"></i>
+                        {categories.map((category) => (
+                            <div key={category.id_Categorias} className="category-item">
+                                <button className="edit-btn" onClick={() => handleEditModalToggle(category)}>
+                                    <div className="red-square"></div>
                                 </button>
+                                <div className="category-details-name">
+                                    <p>{category.nombreCategoria}</p>
+                                </div>
+                                <div className="category-details-products">
+                                    <p>Ver productos</p>
+                                </div>
+                                <div className="category-actions">
+                                    <button className="add-pencil-btn" onClick={() => handleEditModalToggle(category)}>
+                                        <i className="fa-solid fa-pencil"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                        {/* Más categorías */}
+                        ))}
                     </div>
                 </div>
             </div>
-            <ModalCategories isOpen={isModalCategoriesOpen} onClose={handleModalCategoriesToggle}>
-                <div className="modal-body">
-                    <div className="category-form-container">
-                        <div className="left-side">
-                            <div className="form-fields">
-                                <label className="label-name">Nombre</label>
-                                <Input type="text" className="input name-input" />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="right-side">
-                        <Button className="submit-btn-add">Agregar</Button>
-                    </div>
-                </div>
-            </ModalCategories>
-            <ModalEditManageCategories isOpen={isEditModalOpen} onClose={handleEditModalToggle} />
-            <ModalDeleteManageCategories isOpen={isDeleteModalOpen} onRequestClose={handleDeleteModalToggle} onDelete={handleDelete} />
+            <ModalCategories
+                isOpen={isModalCategoriesOpen}
+                onClose={handleModalCategoriesToggle}
+                newCategory={newCategory}
+                setNewCategory={setNewCategory}
+                handleAddCategory={handleAddCategory}
+            />
+            <ModalEditManageCategories
+                isOpen={isEditModalOpen}
+                onClose={handleEditModalToggle}
+                editCategory={editCategory}
+                setEditCategory={setEditCategory}
+                handleEditCategory={handleEditCategory}
+            />
+            {/*<ModalDeleteManageCategories
+                isOpen={isDeleteModalOpen}
+                onRequestClose={handleDeleteModalToggle}
+                onDelete={handleDelete}
+            />*/}
         </div>
     );
-};
+}
 
 export default ManageCategories;

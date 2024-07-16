@@ -74,5 +74,5 @@ exports.deleteCategoria = [authenticateJWT, (req, res) => {
       throw err;
     }
     res.send('Categoría eliminada correctamente');
-  });
+  });
 }];

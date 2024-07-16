@@ -1,0 +1,43 @@
+
+.filter-btn {
+    background: none;
+    color: white;
+    border: none;
+    padding: 0 10px;
+    font-size: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-right: 40px;
+    letter-spacing: 2px;
+    font-weight: 500;
+}
+
+.filter-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    color: black;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 10px;
+    display: none;
+    z-index: 1000;
+}
+
+.filter-menu.open {
+    display: block;
+}
+
+.filter-btn .fa-caret-down {
+    margin-left: 5px;
+}
+
+.price-range .price-inputs .min-btn,
+.price-range .price-inputs .max-btn {
+    width: 40px;
+    border-color: #b3000070;
+    border-radius: 8px;
+}

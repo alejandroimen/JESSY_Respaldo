@@ -5,6 +5,7 @@ import axios from 'axios';
 import InputField from '../molecules/InputField';
 import Button from '../atoms/Button';
 import FormContainer from '../templates/FormContainer';
+import Logo from '../atoms/Logo';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import '../styles/organisms/styles.css';
 
@@ -46,14 +47,13 @@ const RegisterForm = () => {
 
     return (
         <div className="app-container">
+            <header className="header-login">
+                <div className="header-logo-login">
+                    <Logo className="custom-logo" />
+                </div>
+            </header>  
             <div className="register-form-container">
-                <FormContainer>
-                    <div className="form-header">
-                        <h1>Registro</h1>
-                        <div className="icon-circle">
-                            <i className="user-icon"></i>
-                        </div>
-                    </div>
+                <FormContainer icon="user" titulo="Regístrate">  
                     <form onSubmit={handleRegister} className="form">
                         <label className="input-label" htmlFor="usuario">Usuario</label>
                         <InputField

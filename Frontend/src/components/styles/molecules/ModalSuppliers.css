@@ -25,9 +25,9 @@ body {
 
 .modal-suppliers-container {
     background: white;
-    padding: 10px;
+    padding: 50px 10px 10px 10px;
     border-radius: 20px;
-    height: 400px;
+    height: auto;
     width: 500px;
     max-width: 100%;
     display: flex;
@@ -82,6 +82,8 @@ body {
 
 .modal-suppliers-form-container {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
 }
 
@@ -125,50 +127,21 @@ body {
 .modal-suppliers-form-fields-row .modal-suppliers-input-container {
     flex: 1;
 }
-
-.modal-suppliers-form-fields label {
-    font-family: 'Medium ', sans-serif;
-    font-weight: 500;
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    margin-left: 13%;
-    letter-spacing: 1px;
-}
-
-.modal-suppliers-label-name {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    margin-bottom: 15px;
-    font-weight: bold;
-    margin-left: 2%;
-    margin-top: 10px;
-}
-
-.modal-suppliers-label-email {
-    margin-bottom: 5px;
-    font-weight: bold;
-    display: block;
-    margin-bottom: 15px;
-    font-weight: bold;
-    margin-left: 2%;
-    margin-top: 10px;
-}
-
+.modal-suppliers-label-name,
+.modal-suppliers-label-email,
 .modal-suppliers-label-phone-number {
     display: block;
+    width: 85%;
     margin-bottom: 5px;
     font-weight: bold;
     display: block;
     margin-bottom: 15px;
     font-weight: bold;
-    margin-left: 2%;
-    margin-top: 10px;
+    margin: 10px auto 0 auto;
 }
 
 .modal-suppliers-input {
-    width: 100%;
+    width: 85%;
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #b30000;
@@ -179,14 +152,8 @@ body {
 .modal-suppliers-name-input,
 .modal-suppliers-email-input,
 .modal-suppliers-phone-number-input {
-    width: 70%;
-    border-radius: 5px;
-}
-
-.modal-suppliers-name-input,
-.modal-suppliers-email-input,
-.modal-suppliers-phone-number-input {
-    width: 70%;
+    width: 85%;
+    box-sizing: border-box;
     border-radius: 5px;
     margin: 0 auto;
 }
@@ -225,7 +192,7 @@ body {
     border-radius: 10px;
     cursor: pointer;
     font-size: 16px;
-    width: 150px;
+    width:85%;
     text-align: center;
     height: 40px;
     margin-bottom: 20px;

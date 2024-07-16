@@ -1,7 +1,7 @@
 import React from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Logo from '../atoms/Logo';
-import '../styles/molecules/SidebarMenu-Molecule.css';
+import '../styles/molecules/SidebarMenu.css'
 
 const SidebarMenu = ({ isOpen, toggleMenu }) => {
     return (

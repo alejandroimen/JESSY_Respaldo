@@ -8,6 +8,7 @@ import Navbar from './components/organisms/Navbar';
 import ManageSuppliers from './components/pages/ManageSuppliers';
 import ClientPage from './components/pages/ClientPage';
 import InformationProduct from './components/pages/InformationProduct';
+import ManageCategories from './components/pages/ManageCategories';
 import './components/styles/organisms/styles.css'
 
 const App = () => {
@@ -29,6 +30,7 @@ const AppContent = () => {
                 <Route path="/suppliers" element={<ManageSuppliers />} />
                 <Route path="/client" element={<ClientPage />} />
                 <Route path="/info" element={<InformationProduct />} />
+                <Route path="/categories" element={<ManageCategories />} />
             </Routes>
         </div>
     );
