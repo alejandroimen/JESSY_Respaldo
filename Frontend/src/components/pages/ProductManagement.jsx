@@ -90,7 +90,7 @@ const ProductManagement = () => {
                                 </button>
                             </div>
                         </div>
-                        {/* Más productos */}
+                        { /*Más productos*/ }
                     </div>
                 </div>
             </div>
@@ -101,4 +101,4 @@ const ProductManagement = () => {
     );
 };
 
-export default ProductManagement;
+export default ProductManagement; 

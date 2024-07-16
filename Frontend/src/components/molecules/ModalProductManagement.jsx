@@ -90,4 +90,4 @@ const ModalProductManagement = ({ isOpen, onClose }) => {
     );
 };
 
-export default ModalProductManagement;
+export default ModalProductManagement; 
