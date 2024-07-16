@@ -60,12 +60,12 @@ const ProductManagement = () => {
                     </div>
                 </div>
             </header>
-            <div className="content">
-                <div className="actions">
-                    <div className="left-actions">
+            <div className="content-products-management">
+                <div className="actions-products-management">
+                    <div className="left-actions-products-management">
                         <h1>Gestión de productos</h1>
                     </div>
-                    <div className="right-actions">
+                    <div className="right-actions-products-management">
                         <i className="fa-solid fa-plus new-product-btn" onClick={handleModalToggle}></i>
                     </div>
                 </div>

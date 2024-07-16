@@ -111,7 +111,7 @@ const ManageSuppliers = () => {
     };
 
     return (
-        <div className="product-management">
+        <div className="suppliers-management">
             <header className="navbar">
                 <div className="navbar-left">
                     <>
@@ -132,12 +132,12 @@ const ManageSuppliers = () => {
                     </div>
                 </div>
             </header>
-            <div className="content">
-                <div className="actions">
-                    <div className="left-actions">
+            <div className="content-suppliers">
+                <div className="actions-suppliers">
+                    <div className="left-actions-suppliers">
                         <h1>Administrar proveedores</h1>
                     </div>
-                    <div className="right-actions">
+                    <div className="right-actions-suppliers">
                         <i className="fa-solid fa-plus new-product-btn" onClick={handleModalAddSuppliersToggle}></i>
                     </div>
                 </div>
@@ -154,7 +154,7 @@ const ManageSuppliers = () => {
                                 }}>
                                     <div className="red-square"></div>
                                 </button>
-                                <div className="product-details">
+                                <div className="product-details-suppliers">
                                     <p>{supplier.nombre}</p>
                                     <p>{supplier.email}</p>
                                     <p>{supplier.telefono}</p>

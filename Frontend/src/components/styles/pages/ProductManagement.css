@@ -78,27 +78,30 @@
     font-size: inherit;
 }
 
-.content {
+.content-products-management {
     margin-top: 100px;
 }
 
-.actions {
+.actions-products-management {
+    margin-top: 150px;
     display: flex;
-    justify-content: space-between;
+    position: relative;
+    justify-content: center;
     align-items: center;
     margin-bottom: 20px;
     gap: 20px;
 }
 
-.actions .left-actions {
+.actions-products-management .left-actions-products-management {
     display: flex;
     align-items: center;
-    margin-left: 25%;
 }
 
-.actions .right-actions {
+.actions-products-management .right-actions-products-management {
+    position: absolute;
     display: flex;
     align-items: center;
+    right: 0;
 }
 
 .new-product-btn {

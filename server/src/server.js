@@ -17,8 +17,6 @@ require('dotenv').config();
 const app = express();
 const port = process.env.DB_PORT || 3000;
 
-//app.use(cors());
-
 app.use(cors({
   origin: 'http://localhost:5173', // Permite solicitudes desde esta URL
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Permite estos métodos
@@ -40,9 +38,5 @@ app.use('/products',productosMLRoutes);
 
 app.listen(port, () => {
   console.log(`Servidor Express en ejecución en http://localhost:${port}`);
-  /* // Refresca el token cada 5 horas y 50 minutos (350 minutos)
-  setInterval(refreshAccessToken, 350 * 60 * 1000);
-  // Llama a la función al iniciar la aplicación
-  refreshAccessToken(); */ //Esto ya lo tengo en otro lado (al momento de logiarse)
 });
 
