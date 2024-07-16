@@ -166,7 +166,7 @@ const ProductManagement = ({ toggleMenu }) => {
                                 </button>
                             </div>
                         </div>
-                        {/* Más productos */}
+                        { /*Más productos*/ }
                     </div>
                 </div>
             </div>
@@ -177,4 +177,4 @@ const ProductManagement = ({ toggleMenu }) => {
     );
 };
 
-export default ProductManagement;
+export default ProductManagement; 

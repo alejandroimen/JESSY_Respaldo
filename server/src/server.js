@@ -8,7 +8,7 @@ const proveedoresRoutes = require('./routes/proveedores');
 const categoriasRoutes= require('./routes/Categorias');
 const comprasRoutes = require('./routes/Compras');
 const listadeDeseosRoutes = require('./routes/ListaDeDeseos');
-const productosRoutes = require('./routes/productos');
+//const productosRoutes = require('./routes/productos');
 const productosMLRoutes = require('./routes/productoML');
 const comentariosRoutes = require('./routes/Comentarios')
 const { refreshAccessToken } = require('./tokens');
@@ -34,9 +34,9 @@ app.use('/proveedores', proveedoresRoutes);
 app.use('/categorias', categoriasRoutes);
 app.use('/compras', comprasRoutes);
 app.use('/listadeseos', listadeDeseosRoutes);
-app.use('/productos', productosRoutes);
+//app.use('/productos', productosRoutes);
 app.use('/comentarios', comentariosRoutes);
-app.use('/products',productosMLRoutes)
+app.use('/products',productosMLRoutes);
 
 app.listen(port, () => {
   console.log(`Servidor Express en ejecución en http://localhost:${port}`);
@@ -45,3 +45,4 @@ app.listen(port, () => {
   // Llama a la función al iniciar la aplicación
   refreshAccessToken(); */ //Esto ya lo tengo en otro lado (al momento de logiarse)
 });
+

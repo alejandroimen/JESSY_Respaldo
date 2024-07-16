@@ -19,4 +19,4 @@ const ModalDeleteProductManagement = ({ isOpen, onClose, onDelete }) => {
     );
 };
 
-export default ModalDeleteProductManagement;
+export default ModalDeleteProductManagement; 

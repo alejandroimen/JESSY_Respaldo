@@ -90,3 +90,4 @@ exports.getIdProducto = [authenticateJWT, (req, res) => {
     });
   });
 }];
+

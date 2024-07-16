@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import InputField from '../molecules/InputField';
 import Button from '../atoms/Button';
 import FormContainer from '../templates/FormContainer';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import '../styles/organisms/styles.css';
-//const { refreshAccessToken } = require('/server/src/tokens.js');
+
+
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const navigate= useNavigate();
 
     const handleLogin = async (e) => {
         console.log(email, password)
@@ -26,6 +28,7 @@ const LoginForm = () => {
             alert("Inicio de sesión exitoso");
             // Guarda el token en localStorage o en el contexto de la aplicación
             localStorage.setItem('token', response.data.token);
+            navigate('/');
             
         } catch (error) {
             console.error(error);
