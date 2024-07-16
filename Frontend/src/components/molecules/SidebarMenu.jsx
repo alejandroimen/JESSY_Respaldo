@@ -1,7 +1,7 @@
 import React from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Logo from '../atoms/Logo';
-import '../styles/organisms/SidebarMenu.css';
+import '../styles/molecules/SidebarMenu-Molecule.css';
 
 const SidebarMenu = ({ isOpen, toggleMenu }) => {
     return (
@@ -12,13 +12,14 @@ const SidebarMenu = ({ isOpen, toggleMenu }) => {
                     <button className="close-btn" onClick={toggleMenu}>
                         <i className="fas fa-times"></i>
                     </button>
-                </div>
+                </div> 
                 <nav className="menu">
                     <ul>
                         <li><a href="/products">Gestión de productos</a></li>
                         <li><a href="#">Gestionar categorías</a></li>
                         <li><a href="/suppliers">Administrar proveedores</a></li>
                         <li><a href="#">Historial de ventas</a></li>
+                        <li><a href="#">Historial de compras</a></li>
                         <li><a href="/client">Ver como cliente</a></li>
                     </ul>
                 </nav>

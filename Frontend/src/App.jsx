@@ -19,33 +19,13 @@ const App = () => {
 }
 
 const AppContent = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const location = useLocation();
-
-    const toggleMenu = () => {
-        setIsOpen(!isOpen);
-    };
-
-    const isAuthRoute = location.pathname === '/register' || location.pathname === '/login';
-
     return (
-        <div className="app-container">
-            <Navbar />
-            {!isAuthRoute && (
-                <>
-                    <SidebarMenu isOpen={isOpen} toggleMenu={toggleMenu} />
-                    {!isOpen && (
-                        <button className="menu-btn" onClick={toggleMenu}>
-                            <i className="fas fa-bars"></i>
-                        </button>
-                    )}
-                </>
-            )}
+        <div className="app-container">            
             <Routes>
-                <Route path="/" element={<ProductManagement toggleMenu={toggleMenu} />} />
+                <Route path="/" element={<ProductManagement />} />
                 <Route path="/register" element={<RegisterForm />} />
                 <Route path="/login" element={<LoginForm />} />
-                <Route path="/products" element={<ProductManagement toggleMenu={toggleMenu} />} />
+                <Route path="/products" element={<ProductManagement />} />
                 <Route path="/suppliers" element={<ManageSuppliers />} />
                 <Route path="/client" element={<ClientPage />} />
                 <Route path="/info" element={<InformationProduct />} />
