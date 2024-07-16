@@ -4,9 +4,11 @@ import '../styles/pages/ManageSuppliers.css';
 import Logo from '../atoms/Logo';
 import Button from '../atoms/Button';
 import ModalSuppliers from '../molecules/ModalSuppliers';
+import SidebarMenu from '../molecules/SidebarMenu';
 import DeleteModal from '../molecules/DeleteModal';
 
-const ManageSuppliers = ({ toggleSuppliersMenu }) => {
+const ManageSuppliers = () => {
+    const [isOpen, setIsOpen] = useState(false);
     const [isModalEditSuppliersOpen, setIsModalEditSuppliersOpen] = useState(false);
     const [isModalAddSuppliersOpen, setIsModalAddSuppliersOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -15,6 +17,10 @@ const ManageSuppliers = ({ toggleSuppliersMenu }) => {
     const [nombre, setNombre] = useState('');
     const [email, setEmail] = useState('');
     const [telefono, setTelefono] = useState('');
+
+    const toggleMenu = () => {
+        setIsOpen(!isOpen);
+    };
 
     useEffect(() => {
         fetchSuppliers();
@@ -33,9 +39,9 @@ const ManageSuppliers = ({ toggleSuppliersMenu }) => {
             console.error('Error fetching suppliers', error);
         }
     };
-
+ 
     const handleAddOrEditSupplier = async (event) => {
-        event.preventDefault();
+        event.preventDefault(); 
         const supplierData = { nombre, email, telefono };
 
         try {
@@ -108,11 +114,16 @@ const ManageSuppliers = ({ toggleSuppliersMenu }) => {
         <div className="product-management">
             <header className="navbar">
                 <div className="navbar-left">
-                    <button className="menu-btn" onClick={toggleSuppliersMenu}>
-                        <i className="fas fa-bars"></i>
-                    </button>
+                    <>
+                        <SidebarMenu isOpen={isOpen} toggleMenu={toggleMenu} />
+                        {!isOpen && (
+                            <button className="menu-btn" onClick={toggleMenu}>
+                                <i className="fas fa-bars"></i>
+                            </button>
+                        )}
+                    </>
                     <div className="header-line">
-                        <Logo />
+                        <Logo className="custom-logo" />
                     </div>
                 </div>
                 <div className="navbar-right">

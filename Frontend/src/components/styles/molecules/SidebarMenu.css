@@ -4,7 +4,7 @@
     left: -250px;
     width: 250px;
     height: 100%;
-    transition: left 0.3s;
+    transition: left 0.3s; 
     z-index: 1000;
 }
 
@@ -89,17 +89,21 @@
 }
 
 .menu-btn {
+    height: 60px;
     background: none;
     border: none;
     color: #ffffff;
     font-size: 45px;
     cursor: pointer;
-    position: fixed;
-    top: 20px;
-    left: 20px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 0 15px;
+    padding: 0%;
     z-index: 100;
 }
 
 .menu-btn i {
+    margin-bottom: 0;
     font-size: inherit;
 }

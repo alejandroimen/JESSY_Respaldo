@@ -12,7 +12,7 @@ const SidebarMenu = ({ isOpen, toggleMenu }) => {
                     <button className="close-btn" onClick={toggleMenu}>
                         <i className="fas fa-times"></i>
                     </button>
-                </div>
+                </div> 
                 <nav className="menu">
                     <ul>
                         <li><a href="/products">Gestión de productos</a></li>
