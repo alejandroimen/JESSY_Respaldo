@@ -27,14 +27,28 @@ exports.createProduct = async (req, res) => {
         const mlProduct = {
             title: req.body.title,
             description: req.body.description,
-            currency_id: "MXN",
+            currency_id: "MXN", //default
             price: req.body.price,
             available_quantity: req.body.available_quantity,
-            condition: "new",
+            condition: "new", //default
             category_id: req.body.category_id,
-            listing_type_id: "gold_special",
+            listing_type_id: "gold_special", //envio gratis, por default
             pictures: req.body.pictures,
-            attributes: req.body.attributes
+            attributes: [ //Por default ya que no aparece en la vista
+                {
+                  "id": "BRAND",
+                  "value_id": "34567",
+                  "value_name": "HP"
+                },
+                {
+                  "id": "COLOR",
+                  "value_name": "Rojo"
+                },
+                {
+                  "id": "MODEL",
+                  "value_name": "XYZ-123"
+                }
+              ]
         };
 
         // Crear el producto en Mercado Libre
@@ -51,7 +65,7 @@ exports.createProduct = async (req, res) => {
             price: req.body.price,
             available_quantity: req.body.available_quantity,
             title: req.body.title,
-            precioCompra: req.body.precioCompra,
+            precioCompra: 1000, //por dafult 
             description: req.body.description
         };
 

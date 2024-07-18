@@ -4,18 +4,24 @@ import Logo from '../atoms/Logo';
 import axios from 'axios';
 import ModalCategories from '../molecules/ModalCategories';
 import ModalEditManageCategories from '../molecules/ModalEditManageCategories';
+import SidebarMenu from '../molecules/SidebarMenu';
 import Button from '../atoms/Button';
 import Input from '../atoms/Input';
 import ModalDeleteManageCategories from '../molecules/ModalDeleteManageCategories';
 import '../styles/pages/ManageCategories.css'
 
 function ManageCategories({ toggleCategoriesMenu }) {
+    const [isOpen, setIsOpen] = useState(false);
     const [categories, setCategories] = useState([]);
     const [isModalCategoriesOpen, setIsModalCategoriesOpen] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [newCategory, setNewCategory] = useState({ id_Categorias: '', nombreCategoria: '' });
     const [editCategory, setEditCategory] = useState({ id_Categorias: '', nombreCategoria: '' });
+
+    const toggleMenu = () => {
+        setIsOpen(!isOpen);
+    };
 
     const fetchCategories = async () => {
         try {
@@ -77,13 +83,18 @@ function ManageCategories({ toggleCategoriesMenu }) {
 
     return (
         <div className="category-management">
-            <header className="navbar">
+             <header className="navbar">
                 <div className="navbar-left">
-                    <button className="menu-btn" onClick={toggleCategoriesMenu}>
-                        <i className="fas fa-bars"></i>
-                    </button>
-                    <div className="header-logo">
-                        <Logo className="logo-categories" />
+                    <>
+                        <SidebarMenu isOpen={isOpen} toggleMenu={toggleMenu} />
+                        {!isOpen && (
+                            <button className="menu-btn" onClick={toggleMenu}>
+                                <i className="fas fa-bars"></i>
+                            </button>
+                        )}
+                    </>
+                    <div className="header-line">
+                        <Logo className="custom-logo" />
                     </div>
                 </div>
                 <div className="navbar-right">
