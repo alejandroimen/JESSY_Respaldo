@@ -6,6 +6,7 @@ function ModalFiltroProductos(){
     const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
     const [minPrice, setMinPrice] = useState(0);
     const [maxPrice, setMaxPrice] = useState(100);
+    
 
     const toggleFilterMenu = () => {
         setIsFilterOpen(!isFilterOpen);

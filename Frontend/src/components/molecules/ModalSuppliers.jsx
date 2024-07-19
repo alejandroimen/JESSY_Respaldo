@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/molecules/ModalSuppliers.css';
 
-const ModalSuppliers = ({ isOpen, onClose, titulo, nombre, setNombre, email, setEmail, telefono, setTelefono, handleSubmit }) => {
+function ModalSuppliers({ isOpen, onClose, titulo, nombre, setNombre, email, setEmail, telefono, setTelefono, handleSubmit }){
     if (!isOpen) return null;
 
     return (

@@ -1,12 +1,22 @@
 import React, { useState } from 'react';
 import '../styles/molecules/ModalEditProductManagement.css';
 
-const ModalEditProductManagement = ({ isOpen, onClose }) => {
+const ModalEditProductManagement = ({ isOpen, onClose, categories, providers, setCategory_id, setProvider_id }) => {
     const [categoryOpen, setCategoryOpen] = useState(false);
     const [providerOpen, setProviderOpen] = useState(false);
 
     const toggleCategory = () => setCategoryOpen(!categoryOpen);
     const toggleProvider = () => setProviderOpen(!providerOpen);
+
+    const handleSelectCategory = (category) => {
+        setCategory_id(category.id_Categorias);
+        toggleCategory();
+    };
+
+    const handleSelectProvider = (provider) => {
+        setProvider_id(provider.id_proveedor);
+        toggleProvider();
+    };
 
     if (!isOpen) return null;
 
@@ -45,34 +55,36 @@ const ModalEditProductManagement = ({ isOpen, onClose }) => {
                                 <div className="modal-edit-product-management-input-container">
                                     <label className="modal-edit-product-management-label">Categoría</label>
                                     <div className="modal-edit-product-management-select-container">
-                                        <input type="text" className="modal-edit-product-management-input" />
-                                        <button type="button" className="modal-edit-product-management-select-icon" onClick={toggleCategory}>
-                                            <i className="fa-solid fa-chevron-down"></i>
-                                        </button>
+                                        <select type="text" className="modal-edit-product-management-input" >
+                                        {(
+                                            categories.map(category => (
+                                                <option key={category.id_Categorias} onClick={() => handleSelectCategory(category)}>
+                                                    {category.nombreCategoria}
+                                                </option>
+                                                
+                                            ))
+                                    )} 
+                                        </select>
+                                        
                                     </div>
-                                    {categoryOpen && (
-                                        <ul className="modal-edit-product-management-dropdown">
-                                            <li>Categoría 1</li>
-                                            <li>Categoría 2</li>
-                                            <li>Categoría 3</li>
-                                        </ul>
-                                    )}
                                 </div>
                                 <div className="modal-edit-product-management-input-container">
                                     <label className="modal-edit-product-management-label">Proveedor</label>
                                     <div className="modal-edit-product-management-select-container">
-                                        <input type="text" className="modal-edit-product-management-input" />
-                                        <button type="button" className="modal-edit-product-management-select-icon" onClick={toggleProvider}>
-                                            <i className="fa-solid fa-chevron-down"></i>
-                                        </button>
-                                    </div>
-                                    {providerOpen && (
-                                        <ul className="modal-edit-product-management-dropdown">
-                                            <li>Proveedor 1</li>
-                                            <li>Proveedor 2</li>
-                                            <li>Proveedor 3</li>
-                                        </ul>
+                                        <select type="text" className="modal-edit-product-management-input" >
+                                        {(
+                                            providers.map(provider => (
+                                                <option key={provider.id_proveedor} onClick={() => handleSelectProvider(provider)}>
+                                                    {provider.nombre}
+                                                </option>
+                                            ))
                                     )}
+                                        </select>
+                                        {/*<button type="button" className="modal-edit-product-management-select-icon" onClick={toggleProvider}>
+                                            <i className="fa-solid fa-chevron-down"></i>
+                                        </button>*/}
+                                    </div>
+                                
                                 </div>
                             </div>
                         </div>

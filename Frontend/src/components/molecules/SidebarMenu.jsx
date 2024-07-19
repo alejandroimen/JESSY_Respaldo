@@ -1,7 +1,7 @@
 import React from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Logo from '../atoms/Logo';
-import '../styles/molecules/SidebarMenu.css';
+import '../styles/molecules/SidebarMenu.css'
 
 const SidebarMenu = ({ isOpen, toggleMenu }) => {
     return (
@@ -16,7 +16,7 @@ const SidebarMenu = ({ isOpen, toggleMenu }) => {
                 <nav className="menu">
                     <ul>
                         <li><a href="/products">Gestión de productos</a></li>
-                        <li><a href="#">Gestionar categorías</a></li>
+                        <li><a href="/categories">Gestionar categorías</a></li>
                         <li><a href="/suppliers">Administrar proveedores</a></li>
                         <li><a href="#">Historial de ventas</a></li>
                         <li><a href="#">Historial de compras</a></li>

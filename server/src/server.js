@@ -16,8 +16,6 @@ require('dotenv').config();
 const app = express();
 const port = process.env.DB_PORT || 3000;
 
-//app.use(cors());
-
 app.use(cors({
   origin: 'http://localhost:5173', // Permite solicitudes desde esta URL
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Permite estos métodos

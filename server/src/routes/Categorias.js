@@ -8,3 +8,4 @@ router.put('/:id', categoriasController.updateCategoria);
 router.delete('/:id', categoriasController.deleteCategoria);
 
 module.exports = router;
+

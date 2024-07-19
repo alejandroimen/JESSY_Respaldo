@@ -15,10 +15,10 @@ const SidebarMenu = ({ isOpen, toggleMenu }) => {
                 <nav className="menu">
                     <ul>
                         <li><a href="/products">Gestión de productos</a></li>
-                        <li><a href="#">Gestionar categorías</a></li>
+                        <li><a href="/categories">Gestionar categorías</a></li>
                         <li><a href="/suppliers">Administrar proveedores</a></li>
                         <li><a href="#">Historial de ventas</a></li>
-                        <li><a href="#">Ver como cliente</a></li>
+                        <li><a href="client">Ver como cliente</a></li>
                     </ul>
                 </nav>
                 <div className="logout-container">

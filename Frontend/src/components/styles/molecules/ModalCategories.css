@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+body {
+    font-family: 'Medium ', sans-serif;
+    font-weight: 500;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f5f5f5;
+}
+
+.modal-categories-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-categories-container {
+    background: white;
+    padding: 10px;
+    border-radius: 20px;
+    height: 400px;
+    width: 500px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 1.5);
+}
+
+.modal-categories-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: -20px;
+    width: 100%;
+}
+
+.modal-categories-header h2 {
+    font-family: 'SemiBold', sans-serif;
+    font-weight: 600;
+    flex-grow: 1;
+    text-align: center;
+    margin-bottom: 40px;
+    margin-top: -20px;
+    margin-left: 60px;
+    letter-spacing: 1px;
+}
+
+.modal-categories-close-btn {
+    background: none;
+    border: none;
+    font-size: 32px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    margin-top: -40px;
+    margin-right: 10px;
+}
+
+.modal-categories-close-btn i {
+    font-size: 32px;
+    color: #b30000;
+    margin-top: -20px;
+    z-index: 2000;
+}
+
+.modal-categories-body {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+.modal-categories-form-container {
+    display: flex;
+    width: 100%;
+}
+
+.modal-categories-form-fields {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 10px;
+    width: 100%;
+}
+
+.modal-categories-form-fields-row {
+    display: flex;
+    gap: 10px;
+}
+
+.modal-categories-form-fields-row .modal-categories-input-container {
+    flex: 1;
+}
+
+.modal-categories-label-id,
+.modal-categories-label-name {
+    font-family: 'Medium ', sans-serif;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 5px;
+    margin-top: 20px;
+    font-weight: bold;
+    margin-left: 15%;
+    letter-spacing: 1px;
+}
+
+.modal-categories-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #b30000;
+    border-radius: 5px;
+    position: relative;
+}
+
+.modal-categories-id-input,
+.modal-categories-name-input {
+    width: 70%;
+    border-radius: 5px;
+    margin: 0 auto;
+    margin-left: 70px;
+}
+
+.modal-categories-submit-btn-add {
+    font-family: 'ExtraLight', sans-serif;
+    font-weight: 200;
+    color: #ffffff;
+    background: #b30000;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 150px;
+    text-align: center;
+    height: 40px;
+    margin-bottom: 20px;
+    margin-top: 30px;
+    letter-spacing: 1px;
+}
