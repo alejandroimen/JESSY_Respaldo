@@ -8,7 +8,7 @@ const ModalProductManagement = ({ isOpen, onClose, categories, providers, setCat
     const toggleCategory = () => {
         setCategoryOpen(!categoryOpen);
     };
-
+ 
     const toggleProvider = () => {
         setProviderOpen(!providerOpen);
     };
@@ -62,14 +62,14 @@ const ModalProductManagement = ({ isOpen, onClose, categories, providers, setCat
                                     <label className="modal-product-management-label-name">Categoría</label>
                                     <div className="modal-product-management-select-container" /*onClick={toggleCategory}*/>
                                         <select type="text" className="modal-product-management-input modal-product-management-categoria-input" >
-                                        {(
-                                            categories.map(category => (
-                                                <option key={category.id_Categorias} onClick={() => handleSelectCategory(category)}>
-                                                    {category.nombreCategoria}
-                                                </option>
-                                                
-                                            ))
-                                    )}
+                                            <option value="">Seleccionar</option>
+                                            {(
+                                                categories.map(category => (
+                                                    <option key={category.id_Categorias} onClick={() => handleSelectCategory(category)}>
+                                                        {category.nombreCategoria}
+                                                    </option>
+                                                ))
+                                            )}
                                         </select>
                                         
                                         {/*<button type='button' className="modal-product-management-select-icon" onClick={toggleCategory}>                                        <i className={`fas ${categoryOpen ? 'fa-chevron-up' : 'fa-chevron-down'}`}></i>
@@ -88,7 +88,7 @@ const ModalProductManagement = ({ isOpen, onClose, categories, providers, setCat
                                                     {provider.nombre}
                                                 </option>
                                             ))
-                                    )}
+                                        )}
                                         </select>
                                     </div>
                                     

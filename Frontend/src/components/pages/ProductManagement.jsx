@@ -145,7 +145,7 @@ const ProductManagement = () => {
                         <Logo className="custom-logo" />
                     </div>
                 </div>
-                <ModalFiltroProductos />
+                <ModalFiltroProductos categories = {categories} />
                 <div className="navbar-right">
                     <div className="profile-circle">
                         <i className="fas fa-user-circle"></i>
