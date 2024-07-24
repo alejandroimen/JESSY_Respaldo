@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const usersRoutes = require('./routes/users');
 const usersJWTRoutes = require('./routes/users_jwt');
 const ventasRoutes = require('./routes/ventas');
 const proveedoresRoutes = require('./routes/proveedores');
@@ -27,7 +26,6 @@ app.use(cors({
 app.use(bodyParser.json({ limit: '50mb' })); // Ajusta el límite según tus necesidades
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
-app.use('/users', usersRoutes);
 app.use('/usersJWT', usersJWTRoutes);
 app.use('/ventas', ventasRoutes);
 app.use('/proveedores', proveedoresRoutes);

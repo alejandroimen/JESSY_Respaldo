@@ -72,7 +72,7 @@ exports.deleteProveedor = [authenticateJWT, (req, res) => {
   db.query('DELETE FROM Proveedor WHERE id_proveedor = ?', [proveedorId], (err, result) => {
     if (err) {
       console.error('Error al eliminar el proveedor:', err); // Agregar un log para depuración
-      return res.status(500).send('Error al eliminar el proveedor'); // Asegurarse de retornar aquí
+      return res.status(500).send('Error al eliminar el proveedor'); 
     }
 
     if (result.affectedRows === 0) {

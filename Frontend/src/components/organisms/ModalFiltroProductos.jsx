@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../styles/molecules/ModalFiltroProductos.css"
 
-function ModalFiltroProductos(){
+function ModalFiltroProductos( {categories} ){
     const [isFilterOpen, setIsFilterOpen] = useState(false);
     const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
     const [minPrice, setMinPrice] = useState(0);
@@ -41,9 +41,13 @@ function ModalFiltroProductos(){
                         </button>
                         {isCategoriesOpen && (
                             <ul className="categories-list">
-                                <li>Categoría 1</li>
-                                <li>Categoría 2</li>
-                                <li>Categoría 3</li>
+                                {(
+                                    categories.map(category => (
+                                        <option key={category.id_Categorias} onClick={() => handleSelectCategory(category)}>
+                                            {category.nombreCategoria}
+                                        </option>
+                                    ))
+                                )}
                             </ul>
                         )}
                         <button className="button-1">Ordenar (más caros primero)</button>

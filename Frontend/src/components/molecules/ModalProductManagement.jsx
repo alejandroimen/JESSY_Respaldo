@@ -9,7 +9,7 @@ const ModalProductManagement = ({ isOpen, onClose, title, price, categories, ava
     const toggleCategory = () => {
         setCategoryOpen(!categoryOpen);
     };
-
+ 
     const toggleProvider = () => {
         setProviderOpen(!providerOpen);
     };
@@ -105,7 +105,7 @@ const ModalProductManagement = ({ isOpen, onClose, title, price, categories, ava
                                                     {provider.nombre}
                                                 </option>
                                             ))
-                                    )}
+                                        )}
                                         </select>
                                     </div>
                                     
