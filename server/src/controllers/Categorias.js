@@ -14,7 +14,6 @@ db.connect((err) => {
   console.log('Categorias - Conexión a la BD establecida');
 });
 
-
 const authenticateJWT = (req, res, next) => {
   const authHeader = req.headers.authorization;
   if (authHeader) {
@@ -34,19 +33,17 @@ const authenticateJWT = (req, res, next) => {
 exports.getAllCategorias = [authenticateJWT, (req, res) => {
   db.query('SELECT * FROM Categorias', (err, result) => {
     if (err) {
-      res.status(500).send('Error al obtener las categorías');
-      throw err;
+      return res.status(500).send('Error al obtener las categorías');
     }
     res.json(result);
   });
 }];
 
-exports.addCategoria = [authenticateJWT, (req, res) => {
+exports.addCategoria = [authenticateJWT, (req, res) => { 
   const newCategoria = req.body;
   db.query('INSERT INTO Categorias SET ?', newCategoria, (err, result) => {
     if (err) {
-      res.status(500).send('Error al agregar la categoría');
-      throw err;
+      return res.status(500).send('Error al agregar la categoría');
     }
     res.status(201).send('Categoría agregada correctamente');
   });
@@ -70,8 +67,7 @@ exports.deleteCategoria = [authenticateJWT, (req, res) => {
   const categoriaId = req.params.id;
   db.query('DELETE FROM Categorias WHERE id_Categorias = ?', categoriaId, (err, result) => {
     if (err) {
-      res.status(500).send('Error al eliminar la categoría');
-      throw err;
+      return res.status(500).send('Error al eliminar la categoría');
     }
     res.send('Categoría eliminada correctamente');
   });

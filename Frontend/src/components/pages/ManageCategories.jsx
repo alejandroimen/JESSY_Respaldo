@@ -101,7 +101,7 @@ function ManageCategories({ toggleCategoriesMenu }) {
                     <div className="profile-circle">
                         <i className="fas fa-user-circle"></i>
                     </div>
-                </div>
+                </div> 
             </header>
             <div className="content">
                 <div className="actions">

@@ -23,7 +23,9 @@ app.use(cors({
   credentials: true // Si necesitas enviar cookies o autenticación HTTP
 })); 
 
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '50mb' })); // Ajusta el límite según tus necesidades
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 app.use('/users', usersRoutes);
 app.use('/usersJWT', usersJWTRoutes);
