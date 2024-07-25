@@ -24,6 +24,9 @@ const ProductManagement = () => {
     const [provider_id, setProvider_id] = useState('');
     const [categories, setCategories] = useState([]);
     const [providers, setProviders] = useState([]);
+    const [deleteProduct, setDeleteProduct] = useState(false);
+    const [editProduct, setEditProduct] = useState(false);
+    const [currentProduct, setCurrentProduct] = useState(false);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -136,6 +139,23 @@ const ProductManagement = () => {
         setIsModalOpen(!isModalOpen);
     };
 
+    const handleDeleteToggle = () => {
+        setDeleteProduct(!deleteProduct);
+    }
+
+    const handleEditToggle = () => {
+        setEditProduct(!editProduct)
+        setCurrentProduct(null);
+        setProviders('');
+        setCategory_id('');
+        setPrice('');
+        setTitle('');
+        setDescription('');
+        setAvailable_quantity('');
+        setImage('');
+
+    }
+
     return (
         <div className="product-management">
             <header className="navbar">
@@ -180,10 +200,23 @@ const ProductManagement = () => {
                 <p>{producto.provider_name}</p>
             </div>
               <div className="product-actions">
-               <button className="add-pencil-btn">
+               <button className="add-pencil-btn" onClick={() => {
+                setCurrentProduct(producto);
+                setAvailable_quantity(producto.available_quantity);
+                setCategory_id(producto.category_id);
+                setPrice(producto.price);
+                setDescription(producto.description);
+                setTitle(producto.title);
+                setImage(producto.image);
+                
+                setEditProduct(true);
+
+               }}>
                    <i className="fa-solid fa-pencil"></i>
                </button>
-                 <button className="delete-btn">
+                 <button className="delete-btn" onClick={() => {
+                    setDeleteProduct(true);
+                 }}>
                    <i className="fas fa-trash"></i>
                                      </button>
                                   </div>
@@ -209,6 +242,36 @@ const ProductManagement = () => {
                 handleAddProducto={handleAddProducto}
                 setDescription = {setDescription}
                 handleImageUpload={handleImageUpload}
+            />
+            <ModalDeleteProductManagement
+                   isOpen={deleteProduct}
+                    onClose={() => setDeleteProduct(false)
+                    
+                    }
+                   />
+            <ModalEditProductManagement
+                isOpen={editProduct}
+                onClose={() => setEditProduct(false)}
+                categories={categories}
+                setAvailable_quantity={available_quantity}
+                available_quantity={setAvailable_quantity}
+                setCategory_id={category_id}
+                category_id={setCategory_id}
+                setPrice={price}
+                price={setPrice}
+                setDescription={description}
+                description={setDescription}
+                setTitle={title}
+                title={setTitle}
+                setImage={image}
+                image={setImage}
+                setProviders={providers}
+                providers={setProviders}
+                setProvider_id={provider_id}
+                provider_id={setProvider_id}
+                handleImageUpload={handleImageUpload}
+                handleEditToggle={handleEditToggle}
+
             />
         </div>
     );

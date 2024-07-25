@@ -106,9 +106,12 @@ const createProduct = async (req, res) => {
           'Content-Type': 'application/json'
         }
       });
+      const productML_id = response.data.id;
       console.log('Producto creado en Mercado Libre:', response.data);
+      console.log('Producto creado correctamente con el id: ', productML_id);
   
       const dbProduct = {
+        id_ML: productML_id,
         category_id: req.body.category_id,
         price: req.body.price,
         available_quantity: req.body.available_quantity,
@@ -141,6 +144,10 @@ const createProduct = async (req, res) => {
   };
   
 
+
+  /*
+  const mlProductId = response.data.id; // Capturar el ID del producto en Mercado Libre
+  console.log('Producto creado en Mercado Libre con ID:', mlProductId); */
 
 const getProduct = async (req, res) => {
     try {
@@ -186,7 +193,7 @@ const updateProduct = async (req, res) => {
             condition: "new",
             category_id: req.body.category_id,
             listing_type_id: "gold_special",
-            pictures: req.file ? [{ source: `data:image/jpeg;base64,${req.file.buffer.toString('base64')}` }] : req.body.pictures,
+            pictures: req.body.file ? [{ source: `data:image/jpeg;base64,${req.file.buffer.toString('base64')}` }] : req.body.pictures,
             attributes: req.body.attributes
         };
 

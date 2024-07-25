@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import '../styles/molecules/ModalEditProductManagement.css';
+import ImageUpload from '../atoms/ImageUpload';
 
-const ModalEditProductManagement = ({ isOpen, onClose, categories, providers, setCategory_id, setProvider_id }) => {
+const ModalEditProductManagement = ({ isOpen, onClose, categories, providers, setCategory_id, setProvider_id, handleEditToggle, handleImageUpload, category_id, provider_id, title, setTitle, description, setDescription, price, setPrice, available_quantity, setAvailable_quantity }) => {
     const [categoryOpen, setCategoryOpen] = useState(false);
     const [providerOpen, setProviderOpen] = useState(false);
 
     const toggleCategory = () => setCategoryOpen(!categoryOpen);
     const toggleProvider = () => setProviderOpen(!providerOpen);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        handleEditToggle();
+    };
 
     const handleSelectCategory = (category) => {
         setCategory_id(category.id_Categorias);
@@ -33,63 +39,63 @@ const ModalEditProductManagement = ({ isOpen, onClose, categories, providers, se
                     <form className="modal-edit-product-management-form-container">
                         <div className="modal-edit-product-management-upper">
                             <div className="modal-edit-product-management-image-upload">
-                                <div className="modal-edit-product-management-image-placeholder">
-                                    <i className="fas fa-plus"></i>
+                                <div className="modal-edit-product-management-image-placeholder" encType="multipart/form-data" method='post' action='/upload' onSubmit={handleSubmit}>
+                                    <i className="fas fa-plus">
+                                    <ImageUpload onUpload={handleImageUpload} />
+                                    </i>
                                 </div>
                             </div>
                             <div className="modal-edit-product-management-form-fields">
                                 <div className="modal-edit-product-management-input-container">
                                     <label className="modal-edit-product-management-label">Nombre</label>
-                                    <input type="text" className="modal-edit-product-management-input modal-edit-product-management-nombre-input" />
+                                    <input type="text" className="modal-edit-product-management-input modal-edit-product-management-nombre-input" value={title} onChange={(e) => setTitle(e.target.value)}/>
                                 </div>
                                 <div className="modal-edit-product-management-form-fields-row">
                                     <div className="modal-edit-product-management-input-container">
                                         <label className="modal-edit-product-management-label">Cantidad</label>
-                                        <input type="text" className="modal-edit-product-management-input modal-edit-product-management-cantidad-input" />
+                                        <input type="text" className="modal-edit-product-management-input modal-edit-product-management-cantidad-input" value={available_quantity} onChange={(e) => setAvailable_quantity(e.target.value)}/>
                                     </div>
                                     <div className="modal-edit-product-management-input-container">
                                         <label className="modal-edit-product-management-label">Precio</label>
-                                        <input type="text" className="modal-edit-product-management-input modal-edit-product-management-precio-input" />
+                                        <input type="text" className="modal-edit-product-management-input modal-edit-product-management-precio-input" value={price} onChange={(e) => setPrice(e.target.value)}/>
                                     </div>
                                 </div>
                                 <div className="modal-edit-product-management-input-container">
                                     <label className="modal-edit-product-management-label">Categoría</label>
-                                    <div className="modal-edit-product-management-select-container">
-                                        <select type="text" className="modal-edit-product-management-input" >
+                                    <div className="modal-edit-product-management-select-container" onClick={toggleCategory}>
+                                    <select type="text" className="modal-product-management-input modal-product-management-categoria-input" value={category_id} onChange={(e) => setCategory_id(e.target.value)}>
                                         {(
                                             categories.map(category => (
-                                                <option key={category.id_Categorias} onClick={() => handleSelectCategory(category)}>
+                                                <option key={category.id_Categorias} value={category.id_Categorias}  onClick={() => handleSelectCategory(category)}>
                                                     {category.nombreCategoria}
                                                 </option>
                                                 
                                             ))
-                                    )} 
+                                    )}
                                         </select>
                                         
                                     </div>
                                 </div>
                                 <div className="modal-edit-product-management-input-container">
                                     <label className="modal-edit-product-management-label">Proveedor</label>
-                                    <div className="modal-edit-product-management-select-container">
-                                        <select type="text" className="modal-edit-product-management-input" >
+                                    <div className="modal-edit-product-management-select-container" onClick={toggleProvider}>
+                                    <select type="text" className="modal-product-management-input modal-product-management-proveedor-input" value={provider_id} onChange={(e) => setProvider_id(e.target.value)}>
                                         {(
                                             providers.map(provider => (
-                                                <option key={provider.id_proveedor} onClick={() => handleSelectProvider(provider)}>
+                                                <option key={provider.id_proveedor} value={provider.id_proveedor} onClick={() => handleSelectProvider(provider)}>
                                                     {provider.nombre}
                                                 </option>
                                             ))
-                                    )}
+                                        )}
                                         </select>
-                                        {/*<button type="button" className="modal-edit-product-management-select-icon" onClick={toggleProvider}>
-                                            <i className="fa-solid fa-chevron-down"></i>
-                                        </button>*/}
+                                        
                                     </div>
                                 
                                 </div>
                             </div>
                         </div>
-                        <textarea className="modal-edit-product-management-description-input" placeholder="Escribe una pequeña descripción..."></textarea>
-                        <button className="modal-edit-product-management-submit-btn">Guardar</button>
+                        <textarea className="modal-edit-product-management-description-input" placeholder="Escribe una pequeña descripción..." value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+                        <button className="modal-edit-product-management-submit-btn" onClick={handleSubmit}>Guardar</button>
                     </form>
                 </div>
             </div>

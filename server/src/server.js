@@ -34,7 +34,7 @@ app.use('/compras', comprasRoutes);
 app.use('/listadeseos', listadeDeseosRoutes);
 //app.use('/productos', productosRoutes);
 app.use('/comentarios', comentariosRoutes);
-app.use('/products',productosMLRoutes);
+app.use('/products',productosMLRoutes); //aqui esta
 
 app.listen(port, () => {
   console.log(`Servidor Express en ejecución en http://localhost:${port}`);
