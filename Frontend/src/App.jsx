@@ -9,6 +9,7 @@ import ManageSuppliers from './components/pages/ManageSuppliers';
 import ClientPage from './components/pages/ClientPage';
 import InformationProduct from './components/pages/InformationProduct';
 import ManageCategories from './components/pages/ManageCategories';
+import ManagaCompras from './components/pages/ManageCompras';
 import './components/styles/organisms/styles.css'
 
 const App = () => {
@@ -31,6 +32,7 @@ const AppContent = () => {
                 <Route path="/client" element={<ClientPage />} />
                 <Route path="/info" element={<InformationProduct />} />
                 <Route path="/categories" element={<ManageCategories />} />
+                <Route path="/compras" element={<ManagaCompras />} />
             </Routes>
         </div>
     );
