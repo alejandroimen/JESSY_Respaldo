@@ -4,9 +4,9 @@ import "../styles/organisms/Comentarios.css"
 
 function Comentarios(props){
     const listaComentarios = props.comments.map((comment) => (
-        <Comentario 
+        <Comentario
             user = {comment.user}
-            image = {comment.image} 
+            image = {comment.image}
         />
     ))
 

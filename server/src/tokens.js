@@ -40,9 +40,9 @@ const refreshAccessToken = async () => {
         });
         const { access_token, refresh_token } = response.data;
         await updateTokens(access_token, refresh_token);
-        console.log('Tokens actualizados correctamente');
+       /* console.log('Tokens actualizados correctamente');
         console.log('Nuevo access_token:', access_token);
-        console.log('Nuevo refresh_token:', refresh_token);
+        console.log('Nuevo refresh_token:', refresh_token);*/
     } catch (error) {
         console.error('Error al refrescar el token:', error);
     }

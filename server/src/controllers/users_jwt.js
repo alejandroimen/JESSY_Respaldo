@@ -14,7 +14,7 @@ const db = mysql.createConnection({
 
 db.connect((err) => {
   if (err) throw err;
-  console.log('UsersJWT-Conexión a la BD establecida');
+  //console.log('UsersJWT-Conexión a la BD establecida');
 });
 
 exports.login = async (req, res) => {

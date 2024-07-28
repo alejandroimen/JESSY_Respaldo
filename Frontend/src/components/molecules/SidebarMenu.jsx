@@ -18,7 +18,7 @@ const SidebarMenu = ({ isOpen, toggleMenu }) => {
                         <li><a href="/products">Gestión de productos</a></li>
                         <li><a href="/categories">Gestionar categorías</a></li>
                         <li><a href="/suppliers">Administrar proveedores</a></li>
-                        <li><a href="#">Historial de ventas</a></li>
+                        <li><a href="/saleshistory">Historial de ventas</a></li>
                         <li><a href="#">Historial de compras</a></li>
                         <li><a href="/client">Ver como cliente</a></li>
                     </ul>

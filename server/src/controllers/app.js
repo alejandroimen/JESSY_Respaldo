@@ -37,7 +37,7 @@ const db = mysql.createConnection({
 
 db.connect((err) => {
   if (err) throw err;
-  console.log('Conexión a la BD establecida');
+  //console.log('Conexión a la BD establecida');
 });
 
 const authenticateJWT = (req, res, next) => {
