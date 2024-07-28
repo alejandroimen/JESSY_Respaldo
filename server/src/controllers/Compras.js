@@ -1,5 +1,6 @@
 const mysql = require('mysql2');
 const jwt = require('jsonwebtoken');
+const axios = require('axios');
 require('dotenv').config();
 
 const db = mysql.createConnection({
@@ -10,7 +11,7 @@ const db = mysql.createConnection({
 });
 db.connect((err) => {
     if (err) throw err;
-    console.log('Compras-Conexión a la BD establecida');
+    //console.log('Compras-Conexión a la BD establecida');
   });
 // Obtener todas las compras
 exports.getAllCompras = (req, res) => {
@@ -22,7 +23,6 @@ exports.getAllCompras = (req, res) => {
     res.json(result);
   });
 };
-
 
 const authenticateJWT = (req, res, next) => {
   const authHeader = req.headers.authorization;

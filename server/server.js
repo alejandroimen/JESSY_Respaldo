@@ -1,16 +1,16 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const usersJWTRoutes = require('./routes/users_jwt');
-const ventasRoutes = require('./routes/ventas');
-const proveedoresRoutes = require('./routes/proveedores');
-const categoriasRoutes= require('./routes/Categorias');
-const comprasRoutes = require('./routes/Compras');
-const listadeDeseosRoutes = require('./routes/ListaDeDeseos');
+const usersJWTRoutes = require('./src/routes/users_jwt');
+const ventasRoutes = require('./src/routes/ventas');
+const proveedoresRoutes = require('./src/routes/proveedores');
+const categoriasRoutes= require('./src/routes/Categorias');
+const comprasRoutes = require('./src/routes/Compras');
+const listadeDeseosRoutes = require('./src/routes/ListaDeDeseos');
 //const productosRoutes = require('./routes/productos');
-const productosMLRoutes = require('./routes/productoML');
-const comentariosRoutes = require('./routes/Comentarios')
-const { refreshAccessToken } = require('./tokens');
+const productosMLRoutes = require('./src/routes/productoML');
+const comentariosRoutes = require('./src/routes/Comentarios')
+const { refreshAccessToken } = require('./src/tokens');
 require('dotenv').config();
 
 const app = express();

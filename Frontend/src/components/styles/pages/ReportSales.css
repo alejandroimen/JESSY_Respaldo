@@ -1,0 +1,122 @@
+body {
+    font-family: 'Inter';
+    color: #b30000;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    letter-spacing: 1px;
+}
+
+.header-report {
+    background-color: #b30000;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+}
+
+.LogoReport {
+    height: 50px;
+}
+.header-report nav a {
+    color: rgba(255, 255, 255, 0.623);
+    text-decoration: none;
+    font-size: 2.0em;
+    margin-right: 20px;
+    letter-spacing: 1px;
+}
+
+.report-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.report-content {
+    padding: 20px;
+}
+
+h1 {
+    margin: 0.5em 0;
+    color: rgb(0, 0, 0);
+    letter-spacing: 1px;
+    font-size: 1.5em;
+}
+
+h2 {
+    margin: 0.5em 0;
+    color: rgb(0, 0, 0);
+    letter-spacing: 1px;
+    font-size: 2.5em;
+}
+
+.paragrah1 {
+    font-family: 'Inter';
+    font-weight: 700;
+    margin: 0.5em 0;
+    color: rgb(0, 0, 0);
+    letter-spacing: 1px;
+    margin-right: 850px;
+}
+
+.paragrah2 {
+    font-family: 'Inter';
+    font-weight: 700;
+    margin: 0.5em 0;
+    color: rgb(0, 0, 0);
+    letter-spacing: 1px;
+    margin-right: 900px;
+}
+
+.report-table {
+    width: 80%;
+    margin: 1em auto;
+    border-collapse: collapse;
+}
+
+th {
+    border: 1px solid #b30000;
+    padding: 1.5em;
+    font-family: 'Inter';
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+td {
+    font-family: 'Inter';
+    font-weight: 800;
+    color: rgb(0, 0, 0);
+    border: 1px solid #b30000;
+    padding: 1.5em;
+    letter-spacing: 1px;
+}
+
+thead {
+    background-color: #b30000;
+    color: white;
+}
+
+.charts-row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 2em 0;
+}
+
+.chart-wrapper {
+    width: 45%;
+    height: 300px;
+    margin: 0 auto;
+}
+
+.chart-wrapper.full-width {
+    width: 70%;
+    height: 400px;
+    margin: 2em auto;
+}
+
+.FooterReport {
+    height: 4rem;
+}

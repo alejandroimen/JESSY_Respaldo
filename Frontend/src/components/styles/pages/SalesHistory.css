@@ -1,0 +1,165 @@
+.sales-history {
+    padding: 1px;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    background-color: #b30000;
+    padding: 5px;
+    color: white;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    box-sizing: border-box;
+    justify-content: space-between;
+}
+
+.navbar-left,
+.navbar-center,
+.navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-left {
+    flex: 1;
+}
+
+.navbar-right {
+    flex: 1;
+    justify-content: flex-end;
+}
+
+.logo-sales-history {
+    width: 100px;
+    height: 50px;
+    margin-left: 10px;
+    margin-top: 2px;
+}
+
+.menu-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.profile-circle {
+    color: white;
+    font-size: 50px;
+    cursor: pointer;
+    margin-right: 80px;
+}
+
+.profile-circle i {
+    font-size: inherit;
+}
+
+.arrow-button-container {
+    position: absolute;
+    top: 40px;
+    left: 30px;
+}
+
+.fa-arrow-rotate-left {
+    font-size: 40px;
+    cursor: pointer;
+    color: #b30000;
+}
+
+.content {
+    margin-top: 100px;
+    width: 100%;
+    margin-left: -190px;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 20px;
+    width: 60%;
+}
+
+.actions .left-actions h1 {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.actions .right-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Modificación para centrar horizontalmente los enlaces */
+    gap: 5px;
+}
+
+.report-link {
+    cursor: pointer;
+    text-decoration: underline;
+    color: black;
+    font-size: 20px;
+    font-family: 'Inter';
+    font-weight: 600;
+    margin: 0; /* Eliminamos el margen para centrar */
+    letter-spacing: 1px;
+}
+
+.chart-link {
+    cursor: pointer;
+    text-decoration: underline;
+    color: black;
+    font-size: 20px;
+    font-family: 'Inter';
+    font-weight: 600;
+    margin: 0; /* Eliminamos el margen para centrar */
+    letter-spacing: 1px;
+}
+
+.sales-list-container {
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.sales-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sales-history-item {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    width: 50%;
+    letter-spacing: 1px;
+    margin-left: 80px;
+}
+
+.sales-history-details {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row; /* Asegura que los elementos se ordenen horizontalmente */
+    gap: 20px; /* Espacio entre los elementos */
+    max-width: 100%;
+    width: 80%;
+    margin-left: 20px;
+    font-size: 25px;
+}
+
+.sales-history-details p {
+    margin-right: 20px; /* Añade espacio entre los elementos */
+    font-weight: 500;
+    font-size: 20px;
+}

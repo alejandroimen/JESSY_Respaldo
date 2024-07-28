@@ -10,7 +10,7 @@ const db = mysql.createConnection({
 });
 db.connect((err) => {
     if (err) throw err;
-    console.log('Comentarios-Conexión a la BD establecida');
+    //console.log('Comentarios-Conexión a la BD establecida');
   });
 // Obtener todas las Comentarios
 exports.getAllComentarios = (req, res) => {

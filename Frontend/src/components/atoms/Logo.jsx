@@ -13,7 +13,7 @@ const Logo = ({ className }) => {
     );
 };
 
-Logo.propTypes = { 
+Logo.propTypes = {
     className: PropTypes.string,
 };
 

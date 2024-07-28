@@ -11,7 +11,7 @@ const db = mysql.createConnection({
 
 db.connect((err) => {
   if (err) throw err;
-  console.log('Proveedores-Conexión a la BD establecida');
+  //onsole.log('Proveedores-Conexión a la BD establecida');
 });
 
 const authenticateJWT = (req, res, next) => {
