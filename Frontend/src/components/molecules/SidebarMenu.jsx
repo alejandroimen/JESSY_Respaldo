@@ -21,6 +21,7 @@ const SidebarMenu = ({ isOpen, toggleMenu }) => {
                         <li><a href="/saleshistory">Historial de ventas</a></li>
                         <li><a href="#">Historial de compras</a></li>
                         <li><a href="/client">Ver como cliente</a></li>
+                        <li><a href="/compras">Compras</a></li>
                     </ul>
                 </nav>
                 <div className="logout-container">

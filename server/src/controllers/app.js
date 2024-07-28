@@ -245,11 +245,111 @@ const getAllProducts = [authenticateJWT, (req, res) => {
     });
   }];
 
+  const deleteProduct = async (req, res) => {
+    try {
+        const ACCESS_TOKEN = await getAccessToken();
+        console.log('Token de acceso obtenido:', ACCESS_TOKEN);
+        console.log('Producto a eliminar:', req.params.id);
+
+        // Cerrar la publicación en Mercado Libre
+        const closeResponse = await axios.put(
+            `https://api.mercadolibre.com/items/${req.params.id}`,
+            { status: "closed" },
+            {
+                headers: {
+                    Authorization: `Bearer ${ACCESS_TOKEN}`,
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                }
+            }
+        );
+
+        console.log('Respuesta de cerrar la publicación:', closeResponse.data);
+
+        // Esperar un tiempo antes de eliminar el producto para evitar el error de "item optimistic locking"
+        await new Promise(resolve => setTimeout(resolve, 5000));
+/*
+        // Eliminar la publicación de Mercado Libre
+        const deleteResponse = await axios.put(
+            `https://api.mercadolibre.com/items/${req.params.id}`,
+            { deleted: "true" },
+            {
+                headers: {
+                    Authorization: `Bearer ${ACCESS_TOKEN}`,
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                }
+            }
+        );
+
+        console.log('Respuesta de eliminar la publicación:', deleteResponse.data);
+*/
+        // Eliminar producto de la base de datos
+        db.query('DELETE FROM Producto WHERE id_ML = ?', [req.params.id], (err, result) => {
+            if (err) {
+                throw err;
+            }
+            if (result.affectedRows === 0) {
+                return res.status(404).json({ message: 'Producto no encontrado en la base de datos' });
+            }
+            res.json({ message: 'Producto eliminado correctamente' });
+        });
+    } catch (error) {
+        if (error.response) {
+            console.error('Error en la respuesta de Mercado Libre:', error.response.data);
+            res.status(error.response.status).json(error.response.data);
+        } else {
+            console.error('Error al comunicarse con el servidor:', error.message);
+            res.status(500).json({ message: 'Error al comunicarse con el servidor de Mercado Libre o la base de datos', error: error.message });
+        }
+    } 
+};
+
+
+  /*
+  const deleteProduct =  async (req, res) => {
+    try {
+        const ACCESS_TOKEN = await getAccessToken();
+         console.log('Token de acceso obtenido:', ACCESS_TOKEN);
+         console.log('Hola, estoy obteniendo: ', req.params.id)
+        // Eliminar producto de Mercado Libre
+        await axios.put(`https://api.mercadolibre.com/items/${req.params.id}`, { // este es para hacer que la publicación se cierre la publicación, ya que mercado libre no maneja una consulta para eliminarse
+            headers: {
+                Authorization: `Bearer ${ACCESS_TOKEN}`,
+               "Content-Type": "application/json",
+               "Accept": "application/json"
+            },
+            data: {
+                status: "closed"
+            }
+        });
+
+        // Eliminar producto de la base de datos
+        db.query('DELETE FROM Producto WHERE id_ML = ?', [req.params.id], (err, result) => {
+            if (err) {
+                throw err;
+            }
+            if (result.affectedRows === 0) {
+                return res.status(404).json({ message: 'Producto no encontrado en la base de datos' });
+            }
+            res.json({ message: 'Producto eliminado correctamente' });
+        });
+    } catch (error) {
+        if (error.response) {
+            res.status(error.response.status).json(error.response.data);
+        } else {
+            res.status(500).json({ message: 'Error al comunicarse con el servidor de Mercado Libre o la base de datos', error: error.message });
+        }
+    }
+}; */
+
+
 module.exports = {
     createProduct,
     getProduct,
     updateProduct,
-    getAllProducts
+    getAllProducts,
+    deleteProduct
 }; 
 
 // esta api es funcional con postman, pero la quite para poder usar multer y hacer la que esta arriba, pero la de arriba no sirve ni con postman.

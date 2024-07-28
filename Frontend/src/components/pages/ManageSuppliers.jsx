@@ -64,7 +64,7 @@ const ManageSuppliers = () => {
             fetchSuppliers();
             handleModalClose();
         } catch (error) {
-            console.error('Error adding or editing supplier', error);
+            console.error('Error al editar o agregar el producto', error);
         }
     };
 
@@ -81,7 +81,7 @@ const ManageSuppliers = () => {
             setIsDeleteModalOpen(false);
             setCurrentSupplier(null);
         } catch (error) {
-            console.error('Error deleting supplier', error);
+            console.error('Error al eliminar el proveedor', error);
         }
     };
 
