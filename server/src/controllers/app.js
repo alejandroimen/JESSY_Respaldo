@@ -8,24 +8,7 @@ const fs = require('fs');
 
 require('dotenv').config();
 const { getTokens } = require('../tokens');
-
-
-
-/*const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      const uploadDir = path.join(__dirname, '..', 'uploads');
-      if (!fs.existsSync(uploadDir)) {
-        fs.mkdirSync(uploadDir);
-      }
-      cb(null, uploadDir);
-    },
-    filename: (req, file, cb) => {
-      cb(null, Date.now() + path.extname(file.originalname));
-    }
-  });
-  
-  const upload = multer({ storage: storage });*/
-  
+const { log } = require('console');
 
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
@@ -60,6 +43,17 @@ const getAccessToken = async () => {
   const tokens = await getTokens();
   return tokens.access_token;
 };
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/');
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + '-' + file.originalname);
+    }
+});
+
+const upload = multer({ storage: storage });
 
 const createProduct = async (req, res) => {
     try {
@@ -143,12 +137,6 @@ const createProduct = async (req, res) => {
     }
   };
   
-
-
-  /*
-  const mlProductId = response.data.id; // Capturar el ID del producto en Mercado Libre
-  console.log('Producto creado en Mercado Libre con ID:', mlProductId); */
-
 const getProduct = async (req, res) => {
     try {
         const ACCESS_TOKEN = await getAccessToken();
@@ -181,39 +169,44 @@ const getProduct = async (req, res) => {
 };
 
 const updateProduct = async (req, res) => {
+    console.log("estoy dentro");
+    console.log("el id del producto:", req.params.id);
+    console.log("req.body", req.body);
+    console.log('este es la id categoria', req.body.category_id);
+    console.log("name imagen ", req.body.file.filename);
+    console.log("imagen ", req.body.file);
     try {
         const ACCESS_TOKEN = await getAccessToken();
+        const imageUrl = `http://localhost:3000/uploads/${req.body.file.filename}`;
+        console.log("Entro")
 
         const mlProduct = {
             title: req.body.title,
             description: req.body.description,
-            currency_id: "MXN",
             price: req.body.price,
             available_quantity: req.body.available_quantity,
-            condition: "new",
             category_id: req.body.category_id,
-            listing_type_id: "gold_special",
-            pictures: req.body.file ? [{ source: `data:image/jpeg;base64,${req.file.buffer.toString('base64')}` }] : req.body.pictures,
-            attributes: req.body.attributes
+            pictures: [{ source: imageUrl }]
         };
 
-        const mlResponse = await axios.put(`https://api.mercadolibre.com/items/${req.params.id}`, mlProduct, {
+        const mlResponse = await axios.put(`https://api.mercadolibre.com/items/${req.params.id_ML}`, mlProduct, {
             headers: {
                 Authorization: `Bearer ${ACCESS_TOKEN}`,
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "Accept": "application/json"
             }
         });
 
         const dbProduct = {
-            category_id: req.body.category_id,
+            title: req.body.title,
+            description: req.body.description,
             price: req.body.price,
             available_quantity: req.body.available_quantity,
-            title: req.body.title,
-            precioCompra: 10000,
-            description: req.body.description
+            category_id: req.body.category_id,
+            image: req.body.file ? req.body.file : req.body.imageUrl
         };
 
-        db.query('UPDATE Producto SET ? WHERE id_producto = ?', [dbProduct, req.params.id], (err, result) => {
+        db.query('UPDATE Producto SET ? WHERE id_ML = ?', [dbProduct, req.params.id], (err, result) => {
             if (err) {
                 throw err;
             }
@@ -234,6 +227,8 @@ const updateProduct = async (req, res) => {
         }
     }
 };
+
+
 
 const getAllProducts = [authenticateJWT, (req, res) => {
     db.query('SELECT * FROM Producto', (err, result) => {
@@ -268,22 +263,7 @@ const getAllProducts = [authenticateJWT, (req, res) => {
 
         // Esperar un tiempo antes de eliminar el producto para evitar el error de "item optimistic locking"
         await new Promise(resolve => setTimeout(resolve, 5000));
-/*
-        // Eliminar la publicación de Mercado Libre
-        const deleteResponse = await axios.put(
-            `https://api.mercadolibre.com/items/${req.params.id}`,
-            { deleted: "true" },
-            {
-                headers: {
-                    Authorization: `Bearer ${ACCESS_TOKEN}`,
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                }
-            }
-        );
 
-        console.log('Respuesta de eliminar la publicación:', deleteResponse.data);
-*/
         // Eliminar producto de la base de datos
         db.query('DELETE FROM Producto WHERE id_ML = ?', [req.params.id], (err, result) => {
             if (err) {
@@ -304,45 +284,6 @@ const getAllProducts = [authenticateJWT, (req, res) => {
         }
     } 
 };
-
-
-  /*
-  const deleteProduct =  async (req, res) => {
-    try {
-        const ACCESS_TOKEN = await getAccessToken();
-         console.log('Token de acceso obtenido:', ACCESS_TOKEN);
-         console.log('Hola, estoy obteniendo: ', req.params.id)
-        // Eliminar producto de Mercado Libre
-        await axios.put(`https://api.mercadolibre.com/items/${req.params.id}`, { // este es para hacer que la publicación se cierre la publicación, ya que mercado libre no maneja una consulta para eliminarse
-            headers: {
-                Authorization: `Bearer ${ACCESS_TOKEN}`,
-               "Content-Type": "application/json",
-               "Accept": "application/json"
-            },
-            data: {
-                status: "closed"
-            }
-        });
-
-        // Eliminar producto de la base de datos
-        db.query('DELETE FROM Producto WHERE id_ML = ?', [req.params.id], (err, result) => {
-            if (err) {
-                throw err;
-            }
-            if (result.affectedRows === 0) {
-                return res.status(404).json({ message: 'Producto no encontrado en la base de datos' });
-            }
-            res.json({ message: 'Producto eliminado correctamente' });
-        });
-    } catch (error) {
-        if (error.response) {
-            res.status(error.response.status).json(error.response.data);
-        } else {
-            res.status(500).json({ message: 'Error al comunicarse con el servidor de Mercado Libre o la base de datos', error: error.message });
-        }
-    }
-}; */
-
 
 module.exports = {
     createProduct,
