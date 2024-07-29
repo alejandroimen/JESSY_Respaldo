@@ -10,7 +10,7 @@ const data = [
 const CustomBarChart = (props) => (
     <div style={{ textAlign: 'center', width: '100%' }}>
         <h1>Ventas Mensuales</h1>
-        <div style={{ width: '300px', height: '170px', margin: '0 auto' }}>
+        <div style={{ width: '450px', height: '300px', margin: '0 auto' }}>
             <ResponsiveContainer width="100%" height="100%">
                 <BarChart
                     data={props.data}

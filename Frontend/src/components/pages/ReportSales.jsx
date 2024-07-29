@@ -69,32 +69,32 @@ const ReportSales = () => {
     f.forEach((venta) => {
       vendidoMes1 += venta.total;
     });
-    setMes1({ invertido: mes1.invertido, vendido: vendidoMes1 });
+    setMes1({ invertido: 250, vendido: vendidoMes1 });
 
     let invertidoMes2 = 0;
     let vendidoMes2 = 0;
     s.forEach((venta) => {
       vendidoMes2 += venta.total;
     });
-    setMes2({ invertido: mes2.invertido, vendido: vendidoMes2 });
+    setMes2({ invertido: 250, vendido: vendidoMes2 });
 
     let invertidoMes3 = 0;
     let vendidoMes3 = 0;
     t.forEach((venta) => {
       vendidoMes3 += venta.total;
     });
-    setMes3({ invertido: mes3.invertido, vendido: vendidoMes3 });
+    setMes3({ invertido: 250, vendido: vendidoMes3 });
     setDataBar([
       { name: getDateMinus(3).format('MMM'), sales: f.length },
       { name: getDateMinus(2).format('MMM'), sales: s.length },
       { name: getDateMinus(1).format('MMM'), sales: t.length }
     ])
     setDataLine([
-      { name: getDateMinus(4).format('MMM'), Ganancia: 0, Inversion: 20 },
-      { name: getDateMinus(3).format('MMM'), Ganancia: vendidoMes1, Inversion: 20 },
-      { name: getDateMinus(2).format('MMM'), Ganancia: vendidoMes2, Inversion: 20 },
-      { name: getDateMinus(1).format('MMM'), Ganancia: vendidoMes3, Inversion: 20 },
-      { name: getDateMinus(0).format('MMM'), Ganancia: vendidoMes3, Inversion: 20 }
+      { name: getDateMinus(4).format('MMM'), Ganancia: 0, Inversion: mes1.invertido },
+      { name: getDateMinus(3).format('MMM'), Ganancia: vendidoMes1, Inversion: mes1.invertido },
+      { name: getDateMinus(2).format('MMM'), Ganancia: vendidoMes2, Inversion:  mes2.invertido },
+      { name: getDateMinus(1).format('MMM'), Ganancia: vendidoMes3, Inversion:  mes3.invertido },
+      { name: getDateMinus(0).format('MMM'), Ganancia: vendidoMes3, Inversion:  mes3.invertido }
     ])
   };
 
@@ -124,20 +124,13 @@ const ReportSales = () => {
       <div className="report-content">
         <h1>REPORTE</h1>
         <h2> {getDateMinus(3).format('MMMM')} — {getCurrentDate().format('MMMM')} </h2>
-        <p className="paragrah1">Promedio de ganancia: {((mes1.vendido - mes1.invertido) + (mes2.vendido - mes2.invertido) + (mes3.vendido - mes3.invertido)) / 3}</p>
-        <p className="paragrah2">Mes con más ganancia: {Math.max([(mes1.vendido - mes1.invertido), (mes2.vendido - mes2.invertido), (mes3.vendido - mes3.invertido)])} </p>
+        <p className="paragrah1">Promedio de ganancia: {(((mes1.vendido - mes1.invertido) + (mes2.vendido - mes2.invertido) + (mes3.vendido - mes3.invertido)) / 3).toFixed(2)}</p>
         <Table mes1={mes1} mes2={mes2} mes3={mes3} />
         <h2>GRÁFICAS</h2>
         <div className="charts-row">
-          <div className="chart-wrapper">
             <CustomLineChart data={dataLine} />
-          </div>
-          <div className="chart-wrapper">
-            <CustomPieChart />
-          </div>
-        </div>
-        <div className="chart-wrapper full-width">
-          <CustomBarChart data={dataBar} />
+            <CustomBarChart data={dataBar} />
+          
         </div>
       </div>
       <div className="FooterReport">

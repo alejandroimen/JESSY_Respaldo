@@ -98,8 +98,8 @@
 
 .download-icon {
     position: absolute;
-    bottom: 70px;
-    right: 150px;
+    top: 70px;
+    right: 15%;
     font-size: 30px;
     cursor: pointer;
     color: #b30000;

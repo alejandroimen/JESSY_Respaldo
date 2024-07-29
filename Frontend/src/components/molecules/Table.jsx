@@ -22,7 +22,7 @@ function Table (props){
               <td> {props.mes2.invertido} </td>
               <td> {props.mes2.vendido} </td>
               <td> {props.mes2.vendido - props.mes2.invertido}</td>
-              <td> {(props.mes2.vendido/(props.mes2.vendido - props.mes2.invertido))*100}  %</td>
+              <td> {((props.mes2.vendido/(props.mes2.vendido - props.mes2.invertido))*100) ? ((props.mes2.vendido/(props.mes2.vendido - props.mes2.invertido))*100) : 0}  %</td>
             </tr>
             <tr>
                 <td> {props.mes3.invertido} </td>

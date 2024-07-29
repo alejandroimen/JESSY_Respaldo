@@ -15,7 +15,7 @@ const CustomLineChart = (props) => {
     return (
         <div style={{ textAlign: 'center', width: '100%' }}>
             <h1>Ganancias</h1>
-            <div style={{ width: '300px', height: '250px', margin: '0 auto' }}>
+            <div style={{ width: '400px', height: '300px', margin: '0 auto' }}>
                 <ResponsiveContainer width="100%" height="100%">
                     <LineChart
                         data={props.data}
