@@ -10,7 +10,7 @@ const data = [
 
 const COLORS = ['#b30000', '#b30000', '#b30000', '#b30000', '#b30000', '#b30000', '#b30000'];
 
-const CustomPieChart = () => (
+const CustomPieChart = (props) => (
     <div style={{ textAlign: 'center', width: '100%', height: '100%' }}>
         <h1>Productos Vendidos</h1>
         <div style={{ width: '350px', height: '240px', margin: '0 auto' }}>

@@ -1,0 +1,28 @@
+
+.report-table {
+    width: 80%;
+    margin: 1em auto;
+    border-collapse: collapse;
+}
+
+th {
+    border: 1px solid #b30000;
+    padding: 1.5em;
+    font-family: 'Inter';
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+td {
+    font-family: 'Inter';
+    font-weight: 800;
+    color: rgb(0, 0, 0);
+    border: 1px solid #b30000;
+    padding: 1.5em;
+    letter-spacing: 1px;
+}
+
+thead {
+    background-color: #b30000;
+    color: white;
+}

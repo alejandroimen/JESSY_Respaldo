@@ -5,17 +5,19 @@ import moment from 'moment';
 import Logo from '../atoms/Logo';
 import axios from 'axios';
 import SidebarMenu from '../molecules/SidebarMenu';
-import '../styles/pages/SalesHistory.css';
+import '../styles/pages/SalesHistory.css'; 
 
 function SalesHistory({ toggleCategoriesMenu }) {
   const [isOpen, setIsOpen] = useState(false);
   const [sales, setSales] = useState([]);
 
   useEffect(() => {
+    let fechita = getDate();
+    console.log('Fechita: ', fechita);
     const fetchData = async () => {
       try {
         console.log('Esta entrando');
-        const fecha = '2024-07-31T00:00:00.000-00:00';
+        const fecha = getDate();
 
         const response = await axios.post(`http://localhost:3000/ventas/ML/`, {
           to: fecha
@@ -32,24 +34,11 @@ function SalesHistory({ toggleCategoriesMenu }) {
   }, []);
   console.log('Estas son las ventas', sales);
 
-  const getDate = ({ fecha = null, hora = true }) => {
-    console.log('Entro a cañlcular la fecha');
-    let date;
-    if (!fecha) {
-      if (!hora) {
-        date = moment().format("YYYY-MM-DD");
-      } else {
-        date = moment().format("YYYY-MM-DD HH:mm:ss");
-      }
-    } else {
-      if (!hora) {
-        date = moment(fecha).format("YYYY-MM-DD");
-      } else {
-        date = moment(fecha).format("YYYY-MM-DD HH:mm:ss");
-      }
-    }
-    console.log('Esta es', date);
-    return date;
+  const getDate = () => {
+    const formattedDate = moment().format('YYYY-MM-DDT00:00:00.000-00:00');
+
+    console.log(formattedDate)
+    return formattedDate;
   };
 
   const toggleMenu = () => {

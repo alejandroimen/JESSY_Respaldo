@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Logo from '../atoms/Logo';
 import ModalProductManagement from '../molecules/ModalProductManagement';
@@ -124,7 +123,7 @@ const ProductManagement = () => {
             const token = localStorage.getItem('token');
             console.log(`Token de autorización: ${token}`); // Agrega este log
             console.log(`Eliminando producto con id_ML: ${currentProduct.id_ML}`);
-            await axios.delete(`http://localhost:3000/products/${currentProduct.id_ML}`, {
+            await axios.put(`http://localhost:3000/products/${currentProduct.id_ML}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -138,35 +137,6 @@ const ProductManagement = () => {
             alert('Error al eliminar el producto');
         }
     };
-
-    const handleEditProducto = async () => {
-        console.log("si llego");
-        const formData = new FormData();
-        formData.append('title', title);
-        formData.append('price', price);
-        formData.append('available_quantity', available_quantity);
-        formData.append('description', description);
-        formData.append('category_id', category_id);
-        formData.append('file', image);
-        console.log('este es la id categoria', category_id);
-        console.log('este es la imagen', image);
-    
-        try {
-            await axios.put(`http://localhost:3000/products/${currentProduct.id_ML}`, formData, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`,
-                    'Content-Type': 'multipart/form-data',
-                    'Accept': 'application/json'
-                }
-            });
-            fetchProductos();
-            setEditProduct(false);
-        } catch (error) {
-            console.error('Error editing product:', error);
-        }
-    };
-    
-    
 
     const handleEditToggle = () => {
         setEditProduct(!editProduct);
@@ -221,7 +191,7 @@ const ProductManagement = () => {
                                     <p>{producto.title}</p>
                                     <p>${producto.price}</p>
                                     <p>{producto.available_quantity}</p>
-                                    <p>{producto.provider_name}</p>
+                                    <p>{producto.provider_name  }</p>
                                 </div>
                                 <div className="product-actions">
                                     <button className="add-pencil-btn" onClick={() => {
@@ -273,20 +243,19 @@ const ProductManagement = () => {
             <ModalEditProductManagement
                 isOpen={editProduct}
                 onClose={() => setEditProduct(false)}
-                onEditProduct={handleEditProducto}
                 categories={categories}
-                setAvailable_quantity={setAvailable_quantity}
-                available_quantity={available_quantity}
-                setCategory_id={setCategory_id}
-                category_id={category_id}
-                setPrice={setPrice}
-                price={price}
-                setDescription={setDescription}
-                description={description}
-                setTitle={setTitle}
-                title={title}
-                setImage={setImage}
-                image={image}
+                setAvailable_quantity={available_quantity}
+                available_quantity={setAvailable_quantity}
+                setCategory_id={category_id}
+                category_id={setCategory_id}
+                setPrice={price}
+                price={setPrice}
+                setDescription={description}
+                description={setDescription}
+                setTitle={title}
+                title={setTitle}
+                setImage={image}
+                image={setImage}
                 providers={providers}
                 currentProduct={currentProduct}
                 fetchProductos={fetchProductos}
