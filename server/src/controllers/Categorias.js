@@ -132,7 +132,7 @@ exports.getProductos = async (req, res) => {
   } catch (error) {
       // 8. Manejar errores
       console.error('Error en getProductos:', error); // Log de error
-      if (error.response) {
+      if (error.response) { 
           res.status(error.response.status).json(error.response.data);
       } else {
           res.status(500).json({ mensaje: 'Error al comunicarse con la API de Mercado Libre', error: error.message });

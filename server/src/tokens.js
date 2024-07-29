@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const getTokens = () => {
     return new Promise((resolve, reject) => {
-        connection.query('SELECT * FROM Tokens2 ORDER BY id DESC LIMIT 1', (error, results) => {
+        connection.query('SELECT * FROM tokens ORDER BY id DESC LIMIT 1', (error, results) => {
             if (error) {
                 return reject(error);
             }
@@ -15,7 +15,7 @@ const getTokens = () => {
 
 const updateTokens = (access_token, refresh_token) => {
     return new Promise((resolve, reject) => {
-        connection.query('INSERT INTO Tokens2 (access_token, refresh_token) VALUES (?, ?)', [access_token, refresh_token], (error, results) => {
+        connection.query('INSERT INTO tokens (access_token, refresh_token) VALUES (?, ?)', [access_token, refresh_token], (error, results) => {
             if (error) {
                 return reject(error);
             }

@@ -124,16 +124,41 @@ exports.getVentasFromML = async(req, res) => {
   }
 }
 
-exports.getVentaByID = [authenticateJWT, (req, res) =>{
+exports.getVentaByID = async(req, res) =>{
+  try {
+    const ACCESS_TOKEN = await getAccessToken();
+  console.log('Token obtenido', ACCESS_TOKEN);
+  const headers = {
+    Authorization: `Bearer ${ACCESS_TOKEN}`,
+  };
   const idVenta = req.params.id;
-  db.query('SELECT * FROM Producto WHERE id_producto = ?', [idVenta], (err, result) => {
-    if (err) {
-      res.status(500).send('Error al obtener/encontrar el producto');
-      throw err;
-    }
-    res.json({
-      message: 'Venta encontrada:',
-      data: result
-    }); 
-  });
-}];
+
+  const [rows] = await db.promise().query('SELECT p.id_ML, p.title, p.price, v.cantidad FROM Vendido AS v INNER JOIN Producto AS p ON idProductoML = id_ML WHERE idVenta = ?', [idVenta]);
+  console.log('Rows en nuestra bd', rows);
+  const productos = [];
+  
+  for(const prod of rows){
+      const productUrl = `https://api.mercadolibre.com/items/${prod.id_ML}`;
+      try {
+          const productResponse = await axios.get(productUrl, { headers });
+          const product = productResponse.data;
+          
+          console.log('prod de nuestr bd ', prod);
+          console.log('productResopnse ', product.id);
+          if (product.id === prod.id_ML) {
+            productos.push({product: product, cantidad: prod.cantidad});
+          }
+      } catch (productError) {
+          console.error(`Error al obtener el producto`, productError);
+      }
+  }
+  return res.json({ productos });
+  } catch (error) {
+    console.error('Error en getProductos:', error); // Log de error
+      if (error.response) { 
+          res.status(error.response.status).json(error.response.data);
+      } else {
+          res.status(500).json({ mensaje: 'Error al comunicarse con la API de Mercado Libre', error: error.message });
+      }
+  }
+};
