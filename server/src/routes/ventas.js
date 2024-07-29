@@ -4,7 +4,7 @@ const ventasController = require('../controllers/ventas');
 
 router.post('/ML', ventasController.getVentasFromML);
 router.post('/between', ventasController.getVentasBetween)
-router.get('/', ventasController.getAllVentas);
+router.get('/', ventasController.getAllVentas); 
 router.get('/:id', ventasController.getVentaByID)
 
  

@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { FaDownload } from "react-icons/fa6";
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 import Logo from '../atoms/Logo';
 import axios from 'axios';
 import CustomBarChart from '../organisms/BarChart';
@@ -28,7 +31,7 @@ const ReportSales = () => {
     return moment().subtract(cant, 'months')
   }
 
-  
+
 
   const fetchDataVentas = async () => {
     console.log('Entro a la func');
@@ -43,9 +46,9 @@ const ReportSales = () => {
 
       console.log('Response data:', response);
       console.log('Rsp', response.data.first);
- 
+
       handleVenta(response.data.first, response.data.second, response.data.last);
- 
+
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -82,20 +85,31 @@ const ReportSales = () => {
     });
     setMes3({ invertido: mes3.invertido, vendido: vendidoMes3 });
     setDataBar([
-      {name: getDateMinus(3).format('MMM'), sales: f.length},
-      {name: getDateMinus(2).format('MMM'), sales: s.length},
-      {name: getDateMinus(1).format('MMM'), sales: t.length}
+      { name: getDateMinus(3).format('MMM'), sales: f.length },
+      { name: getDateMinus(2).format('MMM'), sales: s.length },
+      { name: getDateMinus(1).format('MMM'), sales: t.length }
     ])
     setDataLine([
-      {name: getDateMinus(4).format('MMM'), Ganancia: 0, Inversion:20},
-      {name: getDateMinus(3).format('MMM'), Ganancia: vendidoMes1, Inversion: 20 },  
-      {name: getDateMinus(2).format('MMM'), Ganancia: vendidoMes2, Inversion: 20 },  
-      {name: getDateMinus(1).format('MMM'), Ganancia: vendidoMes3, Inversion: 20 },  
-      {name: getDateMinus(0).format('MMM'), Ganancia: vendidoMes3, Inversion:20}
+      { name: getDateMinus(4).format('MMM'), Ganancia: 0, Inversion: 20 },
+      { name: getDateMinus(3).format('MMM'), Ganancia: vendidoMes1, Inversion: 20 },
+      { name: getDateMinus(2).format('MMM'), Ganancia: vendidoMes2, Inversion: 20 },
+      { name: getDateMinus(1).format('MMM'), Ganancia: vendidoMes3, Inversion: 20 },
+      { name: getDateMinus(0).format('MMM'), Ganancia: vendidoMes3, Inversion: 20 }
     ])
   };
 
-  
+  const handleDownload = async () => {
+    const input = document.getElementById("report-sales-content");
+    const canvas = await html2canvas(input);
+    const imgData = canvas.toDataURL("image/png");
+    const pdf = new jsPDF("p", "mm", "a4");
+    const imgWidth = 210; // Ancho del PDF en mm
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    const position = 10; // Espacio desde la parte superior del PDF
+    pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+    pdf.save("Report-Sales.pdf");
+  };
+
   return (
     <div className="report-container" id="report-sales-content">
       <header className="header-report">
@@ -104,12 +118,15 @@ const ReportSales = () => {
           <Link to="/reportsales" className="report-link">REPORTE</Link>
         </nav>
       </header>
+      <div className="download-icon" onClick={handleDownload}>
+        <FaDownload className="download-icon" />
+      </div>
       <div className="report-content">
         <h1>REPORTE</h1>
         <h2> {getDateMinus(3).format('MMMM')} — {getCurrentDate().format('MMMM')} </h2>
-        <p className="paragrah1">Promedio de ganancia: {((mes1.vendido-mes1.invertido) + (mes2.vendido-mes2.invertido) + (mes3.vendido-mes3.invertido))/3}</p>
-        <p className="paragrah2">Mes con más ganancia: { Math.max([(mes1.vendido-mes1.invertido), (mes2.vendido-mes2.invertido), (mes3.vendido-mes3.invertido)])} </p>
-        <Table mes1={ mes1 } mes2={ mes2 } mes3={ mes3 } />
+        <p className="paragrah1">Promedio de ganancia: {((mes1.vendido - mes1.invertido) + (mes2.vendido - mes2.invertido) + (mes3.vendido - mes3.invertido)) / 3}</p>
+        <p className="paragrah2">Mes con más ganancia: {Math.max([(mes1.vendido - mes1.invertido), (mes2.vendido - mes2.invertido), (mes3.vendido - mes3.invertido)])} </p>
+        <Table mes1={mes1} mes2={mes2} mes3={mes3} />
         <h2>GRÁFICAS</h2>
         <div className="charts-row">
           <div className="chart-wrapper">

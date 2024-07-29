@@ -1,32 +1,30 @@
 import React from "react";
-import imagen from "../../assets/sendlier.png"
-import "../styles/molecules/ContainerInfo.css"
+import "../styles/molecules/ContainerInfo.css";
 import { FaRegBookmark } from "react-icons/fa6";
 
-function ContainerInfo(){
-    return(
+function ContainerInfo({ product }) {
+    return (
         <div className="container-info-and-buttons">
             <div className="container-buttons">
                 <button className="btn-icon">
                     <FaRegBookmark />
                 </button>
                 <button className="btn-text">
-                        Ir a comprar
+                    Ir a comprar
                 </button>
             </div>
-            <div  className="container-elements">
-                <img src={imagen} alt="" />
+            <div className="container-elements">
+                <img src={product.thumbnail} alt={product.title} />
                 <div className="text-container">
-                    <h2 className="titulo"> Nombre </h2>
-                    <p className="precio-anterior"> $999.99 </p>
-                    <p className="precio-actual"> $999.99 </p>
-                    <p className="categoria"> Categoria </p>
-                    <p className="descripcion"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore quae adipisci corrupti tenetur repellat. Doloremque commodi dolore animi, molestias corporis ipsum omnis qui tenetur deleniti nobis, aliquam rem asperiores tempore.
-                    Dolor, ab quidem iste molestiae culpa molestias animi fuga aperiam maxime voluptatem amet adipisci reiciendis quas possimus exercitationem nostrum magnam ipsum quis inventore? Maiores ratione, id totam tempore suscipit temporibus. </p>
+                    <h2 className="titulo">{product.title}</h2>
+                    <p className="precio-anterior">${product.original_price || product.price}</p>
+                    <p className="precio-actual">${product.price}</p>
+                    <p className="categoria">{product.category_id}</p>
+                    <p className="descripcion">{product.description}</p>
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default ContainerInfo;

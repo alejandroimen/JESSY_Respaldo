@@ -138,27 +138,21 @@ const createProduct = async (req, res) => {
   };
   
 const getProduct = async (req, res) => {
+    console.log("Parametro: ", req.params.id)
     try {
         const ACCESS_TOKEN = await getAccessToken();
-
-        const mlResponse = await axios.get(`https://api.mercadolibre.com/items/${req.params.id}`, {
+        console.log("Mi token:", ACCESS_TOKEN);
+        const respuestaML = await axios.get(`https://api.mercadolibre.com/items/${req.params.id}`, {
             headers: {
                 Authorization: `Bearer ${ACCESS_TOKEN}`
             }
         });
+         
+        const productIds = respuestaML.data;
+        console.log('ID del producto:', productIds);
 
-        db.query('SELECT * FROM Producto WHERE id_producto = ?', [req.params.id], (err, dbResult) => {
-            if (err) {
-                throw err;
-            }
-            if (dbResult.length === 0) {
-                return res.status(404).json({ message: 'Producto no encontrado en la base de datos' });
-            }
-            res.json({
-                mlData: mlResponse.data,
-                dbData: dbResult[0]
-            });
-        });
+        const producto= productIds;
+        return res.json(producto);
     } catch (error) {
         if (error.response) {
             res.status(error.response.status).json(error.response.data);
@@ -285,6 +279,60 @@ const getAllProducts = [authenticateJWT, (req, res) => {
     } 
 };
 
+exports.getProductsClient = async (req,res) => {
+    try {
+        // 1. Obtener el token de acceso
+        const ACCESS_TOKEN = await getAccessToken();
+        console.log('Token obtenido', ACCESS_TOKEN);
+  
+  
+        // 2. Construir la URL para la solicitud de Mercado Libre (obtener IDs de productos)
+        const url = `https://api.mercadolibre.com/users/1494235301/items/search`;
+        const headers = {
+            Authorization: `Bearer ${ACCESS_TOKEN}`,
+        };
+  
+        // 3. Realizar la solicitud GET para obtener los IDs de los productos
+        const respuestaML = await axios.get(url, { headers });
+        console.log('Respuesta de IDs de Mercado Libre:', respuestaML.data);
+  
+        // 4. Manejar la respuesta de Mercado Libre para obtener IDs
+        if (!respuestaML.data || !respuestaML.data.results) {
+            console.error('Error en la respuesta de IDs de Mercado Libre:', respuestaML);
+            return res.status(respuestaML.status).json({ mensaje: 'Error al obtener IDs de productos de Mercado Libre' });
+        }
+  
+        const productIds = respuestaML.data.results;
+        console.log('IDs de productos:', productIds);
+  
+        // 5. Consultar cada producto individualmente y agregarlos
+        const productos = [];
+  
+        for (const productId of productIds) {
+            const productUrl = `https://api.mercadolibre.com/items/${productId}`;
+            try {
+                const productResponse = await axios.get(productUrl, { headers });
+                const product = productResponse.data;
+                productos.push(product);
+            } catch (productError) {
+                console.error(`Error al obtener el producto ${productId}:`, productError);
+            }
+        }
+  
+        // 6. Devolver la lista de productos filtrados
+        return res.json({ productos });
+  
+    } catch (error) {
+        // 8. Manejar errores
+        console.error('Error en getProductos:', error); // Log de error
+        if (error.response) {
+            res.status(error.response.status).json(error.response.data);
+        } else {
+            res.status(500).json({ mensaje: 'Error al comunicarse con la API de Mercado Libre', error: error.message });
+        }
+    }
+};
+
 module.exports = {
     createProduct,
     getProduct,
@@ -293,7 +341,6 @@ module.exports = {
     deleteProduct
 }; 
 
-// esta api es funcional con postman, pero la quite para poder usar multer y hacer la que esta arriba, pero la de arriba no sirve ni con postman.
 /*const axios = require('axios');
 const mysql = require('mysql2');
 require('dotenv').config();
