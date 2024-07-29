@@ -14,6 +14,7 @@ import InformationProduct from './components/pages/InformationProduct';
 import ManageCategories from './components/pages/ManageCategories';
 import SearchCategoriesProduct from './components/organisms/SearchCategoriesProduct';
 import ProtectedRoute from './components/organisms/ProtectedRoute';
+import ProductDetailPage from './components/pages/ProductDetailPage';
 import './components/styles/organisms/styles.css';
 
 const router = createBrowserRouter([
@@ -37,6 +38,9 @@ const router = createBrowserRouter([
       },
       { path: "/client", element: <ClientPage /> },
       { path: "/info", element: <InformationProduct /> },
+      {
+        path: "/producto/:id", element: <ProductDetailPage />
+      },
       { 
         path: "/categories", 
         element: <ProtectedRoute allowedRoles={[2]}><ManageCategories /></ProtectedRoute> 

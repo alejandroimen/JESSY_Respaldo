@@ -79,7 +79,7 @@ exports.deleteCategoria = [authenticateJWT, (req, res) => {
     res.send('Categoría eliminada correctamente');
   });
 }];
-
+//Esta es la que necesitamos
 exports.getProductos = async (req, res) => {
   console.log('Inicio de getProductos', req.params.id); // Log inicial
   try {

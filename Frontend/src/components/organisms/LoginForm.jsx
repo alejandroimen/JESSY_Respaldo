@@ -14,7 +14,7 @@ const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-    //const navigate= useNavigate();
+    const navigate= useNavigate();
 
     const handleLogin = async (e) => {
         console.log(email, password)
@@ -29,6 +29,18 @@ const LoginForm = () => {
             alert("Inicio de sesión exitoso");
             // Guarda el token en localStorage o en el contexto de la aplicación
             localStorage.setItem('token', response.data.token);
+            const token = localStorage.getItem('token');
+            const response2 = await axios.get('http://localhost:3000/usersJWT/role', {
+                headers: {
+                  Authorization: `Bearer ${token}`
+                }
+              });
+              const userRole = response2.data.idRol;
+            if (userRole == 2) {
+                navigate('/');
+            } else {
+                navigate('/client');
+            }
             
             
         } catch (error) {
