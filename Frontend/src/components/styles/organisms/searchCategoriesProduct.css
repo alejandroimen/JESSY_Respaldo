@@ -1,8 +1,8 @@
-.category-management {
+.category-management-search {
     padding: 1px;
 }
 
-.navbar {
+.navbar-search {
     display: flex;
     align-items: center;
     background-color: #b30000;
@@ -17,29 +17,29 @@
     justify-content: space-between;
 }
 
-.navbar-left,
-.navbar-center,
-.navbar-right {
+.navbar-left-search,
+.navbar-center-search,
+.navbar-right-search {
     display: flex;
     align-items: center;
 }
 
-.navbar-left {
+.navbar-left-search {
     flex: 1;
 }
 
-.navbar-center {
+.navbar-center-search {
     flex: 2;
     justify-content: center;
     position: relative;
 }
 
-.navbar-right {
+.navbar-right-search {
     flex: 1;
     justify-content: flex-end;
 }
 
-.logo-categories {
+.logo-search {
     width: 100px;
     height: 50px;
     margin-left: 70px;
@@ -122,24 +122,23 @@
     padding-left: 5px;
 }
 
-.profile-circle {
+.profile-circle-search {
     color: white;
     font-size: 50px;
     cursor: pointer;
     margin-right: 80px;
 }
 
-.profile-circle i {
+.profile-circle-search i {
     font-size: inherit;
 }
 
-.content-categories {
+.content-categories-search {
     margin-top: 100px;
-    width: 250%;
-    margin-left: -190px;
+    width: 100%;
 }
 
-.actions-categories {
+.actions-categories-search {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -147,125 +146,76 @@
     gap: 20px;
 }
 
-.actions-categories .left-actions-categories {
+.actions-categories-search .left-actions-categories-search {
     display: flex;
     align-items: center;
     margin-left: 25%;
     gap: 0px;
 }
 
-.actions-categories .right-actions-categories {
+.actions-categories-search .right-actions-categories-search {
     display: flex;
     align-items: center;
 }
 
-.new-category-btn {
-    background-color: #b30000;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 15px;
-    cursor: pointer;
-    font-size: 30px;
-    margin-right: 10px;
-}
-
-.category-list-container {
-    max-height: 400px;
-    overflow-y: auto;
-    padding-right: 10px;
-}
-
-.category-list {
+.category-list-search {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.category-item {
-    display: flex;
-    align-items: center;
-    background-color: #fff;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.category-icon {
-    font-size: 24px;
-    margin-right: 20px;
-}
-
-.category-details {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    max-width: 100%;
-    width: 80%;
-    margin-right: -20px;
-    font-size: 25px;
-}
-
-.category-details-name {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    max-width: 100%;
-    width: 80%;
-    margin-left: 20px;
-    font-size: 25px;
-}
-
-.category-details-products {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    max-width: 100%;
-    width: 80%;
-    text-decoration: underline;
-    font-size: 25px;
-}
-
-.category-actions {
+.category-actions-search {
     display: flex;
     gap: 10px;
 }
 
-.edit-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    margin: 0;
-}
-
-.red-square {
-    width: 60px;
-    height: 60px;
-    background-color: rgba(255, 0, 0, 0.5);
-    display: inline-block;
-    margin-right: 10px;
-}
-
-.delete-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-}
-
-.add-pencil-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
+.actions-categories-search h1{
+    margin-left: 280px;
 }
 
 .category-details p {
     margin-right: 20px;
     font-weight: 500;
     font-size: 20px;
+}
+
+.product-list-search {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.product-item-search {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.product-image-search {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.product-details-search {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.product-title-search {
+    flex: 1;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.product-price-search,
+.product-stock-search {
+    flex: 0.5;
+    font-size: 16px;
+    text-align: right;
 }

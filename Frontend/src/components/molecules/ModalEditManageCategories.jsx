@@ -23,18 +23,7 @@ const ModalEditManageCategories = ({ isOpen, onClose, editCategory, setEditCateg
                 <div className="modal-edit-manage-categorie-body">
                     <form className="modal-edit-manage-categorie-form-container">
                         <div className="modal-edit-manage-categorie-form-fields">
-                            <div className="modal-edit-manage-categorie-form-fields-row">
-                                <div className="modal-edit-manage-categorie-input-container">
-                                    <label className="modal-edit-manage-categorie-label-id">Id</label>
-                                    <input
-                                        type="text"
-                                        className="modal-edit-manage-categorie-input"
-                                        name="id_Categorias"
-                                        value={editCategory.id_Categorias}
-                                        onChange={handleChange}
-                                    />
-                                </div>
-                            </div>
+                            
                             <div className="modal-edit-manage-categorie-form-fields-row">
                                 <div className="modal-edit-manage-categorie-input-container">
                                     <label className="modal-edit-manage-categorie-label-name">Categoría</label>

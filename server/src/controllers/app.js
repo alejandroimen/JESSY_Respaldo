@@ -84,7 +84,7 @@ const createProduct = async (req, res) => {
           },
           {
             "id": "COLOR",
-            "value_name": "Rojo"
+            "value_name": "Negro"
           },
           {
             "id": "MODEL",
