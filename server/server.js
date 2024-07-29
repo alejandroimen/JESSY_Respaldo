@@ -1,4 +1,5 @@
 const express = require('express');
+const nodemon = require('nodemon');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const usersJWTRoutes = require('./src/routes/users_jwt');
@@ -9,7 +10,8 @@ const comprasRoutes = require('./src/routes/Compras');
 const listadeDeseosRoutes = require('./src/routes/ListaDeDeseos');
 //const productosRoutes = require('./routes/productos');
 const productosMLRoutes = require('./src/routes/productoML');
-const comentariosRoutes = require('./src/routes/Comentarios')
+const comentariosRoutes = require('./src/routes/Comentarios');
+const categoriasML = require('./src/routes/CategoriasML');
 const { refreshAccessToken } = require('./src/tokens');
 require('dotenv').config();
 
@@ -35,6 +37,7 @@ app.use('/listadeseos', listadeDeseosRoutes);
 //app.use('/productos', productosRoutes);
 app.use('/comentarios', comentariosRoutes);
 app.use('/products',productosMLRoutes); //aqui esta
+app.use('/categoriasML', categoriasML);
 
 app.listen(port, () => {
   console.log(`Servidor Express en ejecución en http://localhost:${port}`);

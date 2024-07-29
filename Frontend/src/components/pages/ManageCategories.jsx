@@ -1,5 +1,6 @@
 //Esta es la vista completa de categoria
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Logo from '../atoms/Logo';
 import axios from 'axios';
 import ModalCategories from '../molecules/ModalCategories';
@@ -80,6 +81,7 @@ function ManageCategories({ toggleCategoriesMenu }) {
             console.error('Error al editar la categoría:', error);
         }
     }; 
+    const navigate = useNavigate();
 
     return (
         <div className="category-management">
@@ -103,17 +105,17 @@ function ManageCategories({ toggleCategoriesMenu }) {
                     </div>
                 </div> 
             </header>
-            <div className="content">
-                <div className="actions">
-                    <div className="left-actions">
+            <div className="content-categories">
+                <div className="actions-categories">
+                    <div className="left-actions-categories">
                         <h1>Gestionar categorías</h1>
                     </div>
-                    <div className="right-actions">
-                        <i className="fa-solid fa-plus new-category-btn" onClick={handleModalCategoriesToggle}></i>
+                    <div className="right-actions-categories">
+                        <i className="fa-solid fa-plus new-category-btn" onClick={handleModalCategoriesToggle}></i> 
                     </div>
                 </div>
                 <div className="category-list-container">
-                    <div className="category-list">
+                    <div className="category-list"> {/* Aqui estan las cateorias*/}
                         {categories.map((category) => (
                             <div key={category.id_Categorias} className="category-item">
                                 <button className="edit-btn" onClick={() => handleEditModalToggle(category)}>
@@ -123,7 +125,7 @@ function ManageCategories({ toggleCategoriesMenu }) {
                                     <p>{category.nombreCategoria}</p>
                                 </div>
                                 <div className="category-details-products">
-                                    <p>Ver productos</p>
+                                  <p onClick={() => navigate(`/searchCategoriesProduct/${category.id_Categorias}`)}>Ver productos</p>
                                 </div>
                                 <div className="category-actions">
                                     <button className="add-pencil-btn" onClick={() => handleEditModalToggle(category)}>

@@ -14,7 +14,7 @@ const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-    const navigate= useNavigate();
+    //const navigate= useNavigate();
 
     const handleLogin = async (e) => {
         console.log(email, password)
@@ -29,7 +29,7 @@ const LoginForm = () => {
             alert("Inicio de sesión exitoso");
             // Guarda el token en localStorage o en el contexto de la aplicación
             localStorage.setItem('token', response.data.token);
-            navigate('/');
+            
             
         } catch (error) {
             console.error(error);

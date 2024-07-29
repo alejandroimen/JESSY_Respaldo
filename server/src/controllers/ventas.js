@@ -134,6 +134,6 @@ exports.getVentaByID = [authenticateJWT, (req, res) =>{
     res.json({
       message: 'Venta encontrada:',
       data: result
-    });
+    }); 
   });
 }];

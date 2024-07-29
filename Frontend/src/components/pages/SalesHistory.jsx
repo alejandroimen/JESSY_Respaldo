@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { IoBag } from "react-icons/io5";
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import Logo from '../atoms/Logo';
@@ -69,16 +70,20 @@ function SalesHistory({ toggleCategoriesMenu }) {
         }
     };
 
-   const salesRendered = sales.map((sale) => (
-        <div key={sale.id} className="sales-history-item">
-            <div className="sales-history-details">
-                <p className='sale-id'>{sale.idVenta}</p>
-                <Link to={`/ProductsIn/${sale.idVenta}`}> Ver productos </Link>
-                <p className='sale-total'>{`$ ${sale?.total}`}</p>
-                <p className='sale-fecha'>{sale.fechaVenta}</p>
+   const salesRendered = sales.map((sale) => {
+        const fecha = sale.fechaVenta.split('T')[0];
+        return (
+            <div key={sale.id} className="sales-history-item">
+                <div className="sales-history-details">
+                    <IoBag />
+                    <p className='sale-id'>{sale.idVenta}</p>
+                    <Link className='see-products' to={`/ProductsIn/${sale.idVenta}`}> Ver productos </Link>
+                    <p className='sale-total'>{`$ ${sale?.total}`}</p>
+                    <p className='sale-fecha'>{fecha.split('-')[2] + '-' + fecha.split('-')[1] + '-' + fecha.split('-')[0]}</p>
+                </div>
             </div>
-        </div>
-    ))
+        )
+    })
 
     return (
         <div className="sales-history"> 
