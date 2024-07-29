@@ -32,7 +32,7 @@ const refreshAccessToken = async () => {
                 grant_type: 'refresh_token',
                 client_id: process.env.CLIENT_ID,
                 client_secret: process.env.CLIENT_SECRET,
-                refresh_token: tokens.refresh_token
+                refresh_token: tokens.refresh_token 
             },
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'

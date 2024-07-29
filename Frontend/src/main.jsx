@@ -13,6 +13,7 @@ import ClientPage from './components/pages/ClientPage';
 import InformationProduct from './components/pages/InformationProduct';
 import ManageCategories from './components/pages/ManageCategories';
 import SearchCategoriesProduct from './components/organisms/SearchCategoriesProduct';
+import VentaProducts from './components/organisms/VentaProducts';
 import ProtectedRoute from './components/organisms/ProtectedRoute';
 import ProductDetailPage from './components/pages/ProductDetailPage';
 import './components/styles/organisms/styles.css';
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
         path: "/searchCategoriesProduct/:id_Categorias", 
         element: <ProtectedRoute allowedRoles={[2]}><SearchCategoriesProduct /></ProtectedRoute> 
       },
+      {
+        path: "/productsSelled/:id_Venta",
+        element: <ProtectedRoute allowedRoles={[2]}><VentaProducts /></ProtectedRoute> 
+      }
     ]
   }
 ]);

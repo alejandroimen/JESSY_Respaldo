@@ -36,30 +36,79 @@ const getAccessToken = async()=> {
    return tokens.access_token;
 }
 
+exports.getAllVentas = [authenticateJWT, (req, res) => {
+  db.query('SELECT * FROM Venta', (err, result) => {
+    if (err) { 
+      console.error('Error al obtener las ventas', err);
+      return res.status(500).send('Error al obtener las ventas');
+    }
+    res.json(result);
+  });
+}];
 
+const addVenta = async (newVenta, productos) => {
+  try {
+    // Primera consulta (INSERT o REPLACE en la tabla Venta)
+    const [result] = await db.promise().query('REPLACE INTO Venta SET ?', [newVenta]);
+
+    for (const prod of productos){
+      const [rows] = await db.promise().query('SELECT * FROM Vendido WHERE idVenta = ?', [result.idVenta]);
+
+      if (rows.length === 0) {
+        let vendido = {
+          idProductoML: prod.item.id, 
+          idVenta: [result.idVenta],
+          cantidad: prod.quantity
+        }
+        await db.promise().query('INSERT INTO Vendido SET ?', vendido);
+      } 
+    }
+
+    return result;
+  } catch (error) {
+    console.error('Error al agregar la venta:', error);
+    throw error;
+  }
+};
 
 exports.getVentasFromML = async(req, res) => {
-  const seller = '1494235301'
+  const seller = '1922378338'  
   const from = '2024-06-01T00:00:00.000-00:00'
   const to = req.body.to
-  const url = `https://api.mercadolibre.com/orders/search?seller=${seller}&order.date_created.from=${from}&order.date_created.to=${to}`;
   const token = await getAccessToken();
-  console.log('TOKEN ', token);
-    let result = []
+  const url = `https://api.mercadolibre.com/orders/search?seller=${seller}&order.date_created.from=${from}&order.date_created.to=${to}`;
+  
+  console.log('TOKEN ', token); 
+  let result = []
   try {
+    console.log('Hola');
     const response = await axios.get(url, {
       headers: {
         Authorization: `Bearer ${token}`
+      } 
+    });  
+    console.log('Hola');
+    result = response.data.results
+    let success = response.status === 200 ? true:false
+    console.log('Este es el resultado', result);
+
+    for(const venta of result) {
+      let newVenta = {
+        idVenta: venta.id,
+        fechaVenta: venta.date_created,
+        total: venta.total_amount
       }
-    }); 
-    result = response
-    result = [
-      {"seller": {
-        "nickname": "VENDASDKMB",
-        "id": 239432672
-      }}]
-      console.log(result);
-    return res.status(200).json({success:true, data: result})
+      let productos = venta.order_items
+
+      try {
+        await addVenta(newVenta, productos);
+        console.log('Venta agregada:', venta.id);
+      } catch (error) {
+        console.error('Error al agregar la venta:', error, venta);
+      }
+    }
+
+    return res.status(200).json({success: success, data: result})
   } catch (error) {
     if (error.response) {
       // El servidor respondió con un código de estado diferente a 2xx
@@ -75,27 +124,41 @@ exports.getVentasFromML = async(req, res) => {
   }
 }
 
-exports.getAllVentas = [authenticateJWT, (req, res) => {
-  db.query('SELECT * FROM Venta', (err, result) => {
-    if (err) {
-      console.error('Error al obtener las ventas', err);
-      return res.status(500).send('Error al obtener las ventas');
-    }
-    res.json(result);
-  });
-}];
+exports.getVentaByID = async(req, res) =>{
+  try {
+    const ACCESS_TOKEN = await getAccessToken();
+  console.log('Token obtenido', ACCESS_TOKEN);
+  const headers = {
+    Authorization: `Bearer ${ACCESS_TOKEN}`,
+  };
+  const idVenta = req.params.id;
 
-exports.addVenta = [authenticateJWT, (req, res) => {
-  const newVenta = req.body;
-  db.query('INSERT INTO Venta SET ?', newVenta, (err, result) => {
-    if (err) {
-      console.error('Error al agregar la venta', err);
-      return res.status(500).send('Error al agregar la venta');
-    }
-    res.status(201).send('Venta agregada correctamente');
-  });
-}];
-
-
-
-
+  const [rows] = await db.promise().query('SELECT p.id_ML, p.title, p.price, v.cantidad FROM Vendido AS v INNER JOIN Producto AS p ON idProductoML = id_ML WHERE idVenta = ?', [idVenta]);
+  console.log('Rows en nuestra bd', rows);
+  const productos = [];
+  
+  for(const prod of rows){
+      const productUrl = `https://api.mercadolibre.com/items/${prod.id_ML}`;
+      try {
+          const productResponse = await axios.get(productUrl, { headers });
+          const product = productResponse.data;
+          
+          console.log('prod de nuestr bd ', prod);
+          console.log('productResopnse ', product.id);
+          if (product.id === prod.id_ML) {
+            productos.push({product: product, cantidad: prod.cantidad});
+          }
+      } catch (productError) {
+          console.error(`Error al obtener el producto`, productError);
+      }
+  }
+  return res.json({ productos });
+  } catch (error) {
+    console.error('Error en getProductos:', error); // Log de error
+      if (error.response) { 
+          res.status(error.response.status).json(error.response.data);
+      } else {
+          res.status(500).json({ mensaje: 'Error al comunicarse con la API de Mercado Libre', error: error.message });
+      }
+  }
+};

@@ -104,15 +104,15 @@ const createProduct = async (req, res) => {
       console.log('Producto creado en Mercado Libre:', response.data);
       console.log('Producto creado correctamente con el id: ', productML_id);
   
-      const dbProduct = {
+      const dbProduct = { 
         id_ML: productML_id,
         category_id: req.body.category_id,
         price: req.body.price,
-        available_quantity: req.body.available_quantity,
-        title: req.body.title,
+        available_quantity: req.body.available_quantity, 
+        title: req.body.title,  
         precioCompra: 1000,
         description: req.body.description
-      };
+      }; 
   
       console.log('Intentando guardar producto en la base de datos...');
       db.query('INSERT INTO Producto SET ?', dbProduct, (err, result) => {
