@@ -1,15 +1,16 @@
-
 import React, { useState, useEffect } from 'react';
 import Logo from '../atoms/Logo';
 import ModalProductManagement from '../molecules/ModalProductManagement';
 import ModalEditProductManagement from '../molecules/ModalEditProductManagement';
 import ModalDeleteProductManagement from '../molecules/ModalDeleteProductManagement';
 import ModalFiltroProductos from '../organisms/ModalFiltroProductos';
+import ModalLogout from '../molecules/LogoutModal';
 import SidebarMenu from '../molecules/SidebarMenu';
 import axios from 'axios';
 import Button from '../atoms/Button';
 import Input from '../atoms/Input';
 import ImageUpload from '../atoms/ImageUpload';
+import { useNavigate } from 'react-router-dom';
 import '../styles/pages/ProductManagement.css';
 
 const ProductManagement = () => {
@@ -28,6 +29,9 @@ const ProductManagement = () => {
     const [deleteProduct, setDeleteProduct] = useState(false);
     const [editProduct, setEditProduct] = useState(false);
     const [currentProduct, setCurrentProduct] = useState(null);
+    const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+
+    const navigate = useNavigate();
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -106,7 +110,7 @@ const ProductManagement = () => {
     };
 
     const handleImageUpload = (image) => {
-        setImage({file: image});
+        setImage({ file: image });
     };
 
     const handleModalToggle = () => {
@@ -150,7 +154,7 @@ const ProductManagement = () => {
         formData.append('file', image);
         console.log('este es la id categoria', category_id);
         console.log('este es la imagen', image);
-    
+
         try {
             await axios.put(`http://localhost:3000/products/${currentProduct.id_ML}`, formData, {
                 headers: {
@@ -165,8 +169,6 @@ const ProductManagement = () => {
             console.error('Error editing product:', error);
         }
     };
-    
-    
 
     const handleEditToggle = () => {
         setEditProduct(!editProduct);
@@ -178,6 +180,20 @@ const ProductManagement = () => {
         setDescription('');
         setAvailable_quantity('');
         setImage('');
+    };
+
+    const handleLogoutModalToggle = () => {
+        setIsLogoutModalOpen(!isLogoutModalOpen);
+    };
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        navigate('/login'); // Redirige a la página de inicio de sesión
+    };
+
+    const handleChangeAccountToggle = () => {
+        localStorage.removeItem('token');
+        navigate('/login'); // Redirige a la página de inicio de sesión
     };
 
     return (
@@ -198,6 +214,14 @@ const ProductManagement = () => {
                 <div className="navbar-right">
                     <div className="profile-circle">
                         <i className="fas fa-user-circle"></i>
+                        <div className="user-card">
+                            <div className="user-icon">
+                                <i className="fas fa-user-circle icon-log"></i>
+                            </div>
+                            <h3>Username</h3>
+                            <a href="#" className="change-account" onClick={handleChangeAccountToggle}>Cambiar de cuenta</a>
+                            <a href="#" className="logout" onClick={handleLogoutModalToggle}>Cerrar sesión</a>
+                        </div>
                     </div>
                 </div>
             </header>
@@ -295,6 +319,11 @@ const ProductManagement = () => {
                 handleImageUpload={handleImageUpload}
                 fetchCategories={fetchCategories}
                 fetchProviders={fetchProviders}
+            />
+            <ModalLogout 
+                isOpen={isLogoutModalOpen} 
+                onClose={handleLogoutModalToggle} 
+                onLogout={handleLogout} 
             />
         </div>
     );

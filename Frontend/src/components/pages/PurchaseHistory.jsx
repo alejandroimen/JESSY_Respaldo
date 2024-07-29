@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SidebarMenu from '../molecules/SidebarMenu';
 import Logo from '../atoms/Logo';
 import PurchaseItem from '../organisms/PurchaseItem';
 import ModalPurchase from '../molecules/ModalPurchase';
 import '../styles/pages/PurchaseHistory.css';
+import axios from 'axios';
 
 const PurchaseHistory = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,6 +14,47 @@ const PurchaseHistory = () => {
     provider: '',
     quantity: ''
   });
+  const [products, setProducts] = useState([]);
+  const [providers, setProviders] = useState([]);
+  const [purchases, setPurchases] = useState([]);
+
+  useEffect(() => {
+    const fetchProductsAndProviders = async () => {
+      try {
+        const productsResponse = await axios.get('http://localhost:3000/products', {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+          }
+        });
+        setProducts(productsResponse.data);
+
+        const providersResponse = await axios.get('http://localhost:3000/proveedores', {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+          }
+        });
+        setProviders(providersResponse.data);
+      } catch (error) {
+        console.error('Error al obtener productos o proveedores:', error);
+      }
+    };
+
+    const fetchPurchases = async () => {
+      try {
+        const purchasesResponse = await axios.get('http://localhost:3000/compras', {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+          }
+        });
+        setPurchases(purchasesResponse.data);
+      } catch (error) {
+        console.error('Error al obtener las compras:', error);
+      }
+    };
+
+    fetchProductsAndProviders();
+    fetchPurchases();
+  }, []);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -22,17 +64,26 @@ const PurchaseHistory = () => {
     setIsModalOpen(!isModalOpen);
   };
 
-  const handleAddPurchase = () => {
-    // Lógica para manejar la adición de una nueva compra
-    console.log(newPurchase);
-    handleModalPurchaseToggle();
+  const handleAddPurchase = async () => {
+    try {
+      await axios.post('http://localhost:3000/compras/', newPurchase, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      setNewPurchase({ product: '', provider: '', quantity: '' });
+      handleModalPurchaseToggle();
+      // Refrescar la lista de compras
+      const purchasesResponse = await axios.get('http://localhost:3000/compras/', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      setPurchases(purchasesResponse.data);
+    } catch (error) {
+      console.error('Error al agregar la compra:', error);
+    }
   };
-
-  const purchases = [
-    { product: 'Producto', provider: 'Proveedor', price: '$ 999.99', quantity: '999', date: '10-10-2000' },
-    { product: 'Producto', provider: 'Proveedor', price: '$ 999.99', quantity: '999', date: '10-10-2000' },
-    { product: 'Producto', provider: 'Proveedor', price: '$ 999.99', quantity: '999', date: '10-10-2000' }
-  ];
 
   return (
     <div className="purchase-history">
@@ -70,9 +121,11 @@ const PurchaseHistory = () => {
       <ModalPurchase
         isOpen={isModalOpen}
         onClose={handleModalPurchaseToggle}
+        onAdd={handleAddPurchase}
         newPurchase={newPurchase}
         setNewPurchase={setNewPurchase}
-        handleAddPurchase={handleAddPurchase}
+        products={products}
+        providers={providers}
       />
     </div>
   );

@@ -1,6 +1,10 @@
 import React from 'react';
 
 const PurchaseItem = ({ product, provider, price, quantity, date }) => {
+     
+
+
+
   return (
     <div className="purchase-item">
       <div className="purchase-product-image"></div>
