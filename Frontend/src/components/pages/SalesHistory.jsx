@@ -27,9 +27,9 @@ function SalesHistory({ toggleCategoriesMenu }) {
             console.error('Error fetching data:', error);
           }
         };
-    
-        fetchData();
+        fetchSales();
       }, []);
+      console.log('Estas son las ventas', sales);
 
       const getDate = ({ fecha = null, hora = true }) => {
         console.log('Entro a cañlcular la fecha');
@@ -57,30 +57,28 @@ function SalesHistory({ toggleCategoriesMenu }) {
 
     const fetchSales = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/ventas', {
+            const response = await axios.get('http://localhost:3000/ventas/', {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
             });
+            console.log('Esta es la response', response);
             setSales(response.data);
         } catch (error) {
             console.error('Error al obtener las ventas:', error);
         }
     };
 
-    useEffect(() => {
-        fetchSales();
-    }, []);
-
-
-
-    const handleEditModalToggle = () => {//NO SE VA A EDITAR
-        // Implementa la lógica para el modal de edición
-    };
-
-    const handleDeleteModalToggle = () => {//NO SE VA A ELIMINAR
-        // Implementa la lógica para el modal de eliminación
-    };
+   const salesRendered = sales.map((sale) => (
+        <div key={sale.id} className="sales-history-item">
+            <div className="sales-history-details">
+                <p className='sale-id'>{sale.idVenta}</p>
+                <Link to={`/ProductsIn/${sale.idVenta}`}> Ver productos </Link>
+                <p className='sale-total'>{`$ ${sale?.total}`}</p>
+                <p className='sale-fecha'>{sale.fechaVenta}</p>
+            </div>
+        </div>
+    ))
 
     return (
         <div className="sales-history"> 
@@ -121,28 +119,7 @@ function SalesHistory({ toggleCategoriesMenu }) {
                 </div>
                 <div className="sales-list-container">
                     <div className="sales-list">
-                        {sales.map((sale) => (
-                            <div key={sale.id} className="sales-history-item">
-                                <button className="sales-history-edit-btn">
-                                    <div className="sales-history-red-square"></div>
-                                </button>
-                                <div className="sales-history-details">
-                                    <p>{sale.nombreCliente}</p>
-                                    <p>{sale.nombreProducto}</p>
-                                    <p>{`$ ${sale.precio}`}</p>
-                                    <p>{sale.cantidad}</p>
-                                    <p>{sale.fecha}</p>
-                                </div>
-                                <div className="sales-history-product-actions">
-                                    <button className="sales-history-add-pencil-btn" onClick={handleEditModalToggle}>
-                                        <i className="fa-solid fa-pencil"></i>
-                                    </button>
-                                    <button className="sales-history-delete-btn" onClick={handleDeleteModalToggle}>
-                                        <i className="fas fa-trash"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        ))}
+                       {salesRendered}
                     </div>
                 </div>
             </div>

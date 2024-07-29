@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const getTokens = () => {
     return new Promise((resolve, reject) => {
-        connection.query('SELECT * FROM tokens ORDER BY id DESC LIMIT 1', (error, results) => {
+        connection.query('SELECT * FROM Tokens2 ORDER BY id DESC LIMIT 1', (error, results) => {
             if (error) {
                 return reject(error);
             }
@@ -15,7 +15,7 @@ const getTokens = () => {
 
 const updateTokens = (access_token, refresh_token) => {
     return new Promise((resolve, reject) => {
-        connection.query('INSERT INTO tokens (access_token, refresh_token) VALUES (?, ?)', [access_token, refresh_token], (error, results) => {
+        connection.query('INSERT INTO Tokens2 (access_token, refresh_token) VALUES (?, ?)', [access_token, refresh_token], (error, results) => {
             if (error) {
                 return reject(error);
             }
@@ -32,7 +32,7 @@ const refreshAccessToken = async () => {
                 grant_type: 'refresh_token',
                 client_id: process.env.CLIENT_ID,
                 client_secret: process.env.CLIENT_SECRET,
-                refresh_token: tokens.refresh_token
+                refresh_token: tokens.refresh_token 
             },
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
