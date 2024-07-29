@@ -16,6 +16,7 @@ import SearchCategoriesProduct from './components/organisms/SearchCategoriesProd
 import VentaProducts from './components/organisms/VentaProducts';
 import ProtectedRoute from './components/organisms/ProtectedRoute';
 import ProductDetailPage from './components/pages/ProductDetailPage';
+import PurchaseHistory from './components/pages/PurchaseHistory';
 import './components/styles/organisms/styles.css';
 
 const router = createBrowserRouter([
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
       {
         path: "/productsSelled/:id_Venta",
         element: <ProtectedRoute allowedRoles={[2]}><VentaProducts /></ProtectedRoute> 
+      },
+      { 
+        path: "/purchasehistory", 
+        element: <ProtectedRoute allowedRoles={[2]} > <PurchaseHistory /></ProtectedRoute>
       }
     ]
   }
